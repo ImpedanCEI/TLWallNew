@@ -225,7 +225,7 @@
 <tbody>
 <tr class="odd">
 <td>Python</td>
-<td>3.9</td>
+<td>3.8</td>
 <td>3.11–3.12</td>
 </tr>
 </tbody>
@@ -284,16 +284,19 @@
 </ul>
 <h3 id="install-gui-dependencies-recommended-method">Install GUI dependencies (recommended method)</h3>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pyqt5</span></code></pre></div>
-<p>Alternatively, you may use PySide6:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pyside6</span></code></pre></div>
+<blockquote>
+<p><strong>Note:</strong> The GUI is developed and tested with PyQt5. PySide6 is not currently supported.</p>
+</blockquote>
 <h3 id="optional-pip-extras-advanced-users">Optional pip extras (advanced users)</h3>
 <p>If PyTlWall is installed from source, GUI dependencies can also be installed using <em>pip extras</em>:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="st">&quot;.[gui]&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="st">&quot;.[gui]&quot;</span></span></code></pre></div>
 <p>This command installs PyTlWall together with the optional dependency group <code>gui</code>. If you are not familiar with pip extras, simply install <code>pyqt5</code> manually as shown above.</p>
 <h3 id="launching-the-gui">Launching the GUI</h3>
 <p>You can start the GUI in any of the following ways:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Recommended (module entry point)</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pytlwall_gui</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Recommended (module entry point)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pytlwall_gui</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Via main pytlwall module</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pytlwall <span class="at">--gui</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Repository helper script</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> run_gui.py</span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If installed with a console entry point (when available)</span></span>
@@ -339,8 +342,8 @@
 <hr />
 <h2 id="authors">Authors</h2>
 <ul>
-<li>Tatiana Rijoff</li>
-<li>Carlo Zannini (CERN)</li>
+<li>Tatiana Rijoff (tatiana.rijoff@gmail.com)</li>
+<li>Carlo Zannini (carlo.zannini@cern.ch)</li>
 </ul>
 <hr />
 <p><em>Last updated: December 2025</em></p>

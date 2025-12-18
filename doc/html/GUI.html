@@ -166,7 +166,16 @@
 <ul>
 <li><a href="#typical-workflow">Typical workflow</a></li>
 </ul></li>
-<li><a href="#tips-and-troubleshooting">Tips and Troubleshooting</a></li>
+<li><a href="#accelerator-workflow">Accelerator Workflow</a></li>
+<li><a href="#tips-and-troubleshooting">Tips and Troubleshooting</a>
+<ul>
+<li><a href="#impedance-selection">Impedance Selection</a></li>
+<li><a href="#impedance-order">Impedance Order</a></li>
+<li><a href="#drag-drop">Drag &amp; Drop</a></li>
+<li><a href="#plotting">Plotting</a></li>
+<li><a href="#total-chamber">Total Chamber</a></li>
+<li><a href="#documentation">Documentation</a></li>
+</ul></li>
 </ul></li>
 </ul>
             </div>
@@ -190,6 +199,7 @@ The GUI is designed to:</p>
 <li>compute selected impedances</li>
 <li>inspect results as tables and overlay plots</li>
 <li>export configurations, impedances, plots, and complete workspaces (“Views”)</li>
+<li>load and calculate multi-chamber accelerator lattices</li>
 </ul>
 <hr />
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -204,17 +214,21 @@ The GUI is designed to:</p>
 </ul></li>
 <li><a href="GUI_MENU_BAR.html">Menu Bar and Actions</a></li>
 <li><a href="GUI_VIEW_IO.html">Saving and Loading Views</a></li>
+<li><a href="#accelerator-workflow">Accelerator Workflow</a></li>
 <li><a href="#tips-and-troubleshooting">Tips and Troubleshooting</a></li>
 </ul>
 <hr />
 <h2 id="getting-started">Getting Started</h2>
 <h3 id="launch">Launch</h3>
 <p>From the package entry points (depending on your installation):</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Launch from the main package (if provided)</span></span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Recommended: Launch via the main module</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pytlwall <span class="at">--gui</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Or launch the GUI module directly (as in README)</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> QT_interface</span></code></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Or launch the GUI module directly</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> pytlwall_gui</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Or use the helper script</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> run_gui.py</span></code></pre></div>
 <p>If the GUI does not start, ensure the GUI dependencies are installed:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pyqt5 matplotlib</span></code></pre></div>
 <hr />
@@ -235,10 +249,10 @@ The GUI is designed to:</p>
 </ul>
 <h3 id="typical-workflow">Typical workflow</h3>
 <ol type="1">
-<li>Create one or more chambers.</li>
+<li>Create one or more chambers (or load an accelerator lattice).</li>
 <li>Configure geometry, layers, boundary, frequency definition, and beam.</li>
 <li>Choose which impedances to compute.</li>
-<li>Run <strong>Calculate</strong>.</li>
+<li>Run <strong>Calculate</strong> (single chamber) or <strong>Calculate All</strong> (accelerator).</li>
 <li>Drag impedances from the chamber tree into:
 <ul>
 <li><strong>Data</strong> to build custom tables</li>
@@ -247,13 +261,75 @@ The GUI is designed to:</p>
 <li>Export results or save the whole workspace as a <strong>View</strong>.</li>
 </ol>
 <hr />
-<h2 id="tips-and-troubleshooting">Tips and Troubleshooting</h2>
+<h2 id="accelerator-workflow">Accelerator Workflow</h2>
+<p>The GUI supports multi-chamber accelerator calculations:</p>
+<ol type="1">
+<li><strong>Load Accelerator</strong> (Accelerator menu)
 <ul>
-<li><strong>Mandatory impedances:</strong> <code>ZLong</code> and <code>ZTrans</code> are always enabled.</li>
-<li><strong>Drag &amp; drop:</strong> you can drag an impedance “base” (e.g. <code>ZLong</code>) or a component (e.g. <code>ZLongRe</code>).</li>
-<li><strong>Log scales:</strong> when plotting in log scale, absolute values are used and non-positive points are masked.</li>
-<li><strong>Documentation in Help menu:</strong> after running <code>build_doc</code>, HTML pages are expected in <code>doc/html/</code>.</li>
+<li>Select a directory containing:
+<ul>
+<li><code>apertype2.txt</code> (aperture types)</li>
+<li><code>b_L_betax_betay.txt</code> (geometry and optics)</li>
+<li>Chamber configuration files (<code>*.cfg</code>)</li>
+</ul></li>
+</ul></li>
+<li><strong>Configure Impedance Selection</strong>
+<ul>
+<li>Use the <strong>Accelerator → Impedance Selection</strong> submenu</li>
+<li>Select/deselect impedances for all chambers at once</li>
+</ul></li>
+<li><strong>Calculate All</strong>
+<ul>
+<li>Computes impedances for all loaded chambers</li>
+<li>Creates a <strong>Total</strong> chamber (★) with summed impedances</li>
+</ul></li>
+<li><strong>Analyze Results</strong>
+<ul>
+<li>The Total chamber appears at the top of the sidebar with gold highlighting</li>
+<li>Drag impedances from any chamber (including Total) to Data/Plot panels</li>
+</ul></li>
+</ol>
+<hr />
+<h2 id="tips-and-troubleshooting">Tips and Troubleshooting</h2>
+<h3 id="impedance-selection">Impedance Selection</h3>
+<ul>
+<li><strong>Mandatory impedances:</strong> <code>ZLong</code> and <code>ZTrans</code> are always enabled and cannot be deselected.</li>
+<li><strong>Default impedances:</strong> The following are checked by default:
+<ul>
+<li><code>ZLong</code>, <code>ZTrans</code> (mandatory)</li>
+<li><code>ZLongTotal</code></li>
+<li><code>ZDipX</code>, <code>ZDipY</code>, <code>ZQuadX</code>, <code>ZQuadY</code></li>
+</ul></li>
 </ul>
+<h3 id="impedance-order">Impedance Order</h3>
+<p>Impedances are organized in categories:</p>
+<ol type="1">
+<li><strong>Base Impedances</strong> (wall contribution): ZLong, ZTrans, ZDipX, ZDipY, ZQuadX, ZQuadY</li>
+<li><strong>Total Impedances</strong> (wall + space charge): ZLongTotal, ZTransTotal, ZDipXTotal, ZDipYTotal, ZQuadXTotal, ZQuadYTotal</li>
+<li><strong>Surface Impedances</strong>: ZLongSurf, ZTransSurf</li>
+<li><strong>Space Charge</strong> (DSC/ISC): ZLongDSC, ZLongISC, ZTransDSC, ZTransISC</li>
+</ol>
+<h3 id="drag-drop">Drag &amp; Drop</h3>
+<ul>
+<li>Drag an impedance “base” (e.g. <code>ZLong</code>) to add both Re and Im components</li>
+<li>Drag a specific component (e.g. <code>ZLongRe</code>) to add only that component</li>
+<li>The <strong>Total</strong> chamber (★) supports drag &amp; drop like any other chamber</li>
+</ul>
+<h3 id="plotting">Plotting</h3>
+<ul>
+<li><strong>Log scales:</strong> When plotting in log scale, absolute values are used</li>
+<li><strong>Automatic fallback:</strong> If data contains no positive values, the plot automatically switches to linear scale</li>
+<li><strong>Multiple curves:</strong> Each dropped impedance gets a distinct color</li>
+</ul>
+<h3 id="total-chamber">Total Chamber</h3>
+<ul>
+<li>After <strong>Calculate All</strong>, a special “Total” chamber appears</li>
+<li>It’s marked with ★ and has a gold background</li>
+<li>Contains the sum of impedances from all individual chambers</li>
+<li>Cannot be removed manually (recreated on each Calculate All)</li>
+</ul>
+<h3 id="documentation">Documentation</h3>
+<p>After running <code>build_doc</code>, HTML pages are expected in <code>doc/html/</code> and accessible from the Help menu.</p>
 <p>If you need the exact meaning of any button or setting, see the dedicated pages for each panel and menu.</p>
 
     </main>

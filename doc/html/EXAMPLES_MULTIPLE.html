@@ -166,13 +166,19 @@
 <li><a href="#geometry-and-optics-file-b_l_betax_betay.txt">2. Geometry and Optics File — <code>b_L_betax_betay.txt</code></a></li>
 <li><a href="#chamber-configuration-templates">3. Chamber Configuration Templates</a></li>
 </ul></li>
-<li><a href="#example-1-running-multiplechamber">Example 1: Running MultipleChamber</a></li>
-<li><a href="#example-2-directory-structure-of-the-output">Example 2: Directory Structure of the Output</a></li>
-<li><a href="#example-3-per-chamber-impedance-files">Example 3: Per-Chamber Impedance Files</a></li>
-<li><a href="#example-4-automatic-impedance-plots">Example 4: Automatic Impedance Plots</a></li>
-<li><a href="#example-5-total-impedance-summation">Example 5: Total Impedance Summation</a></li>
-<li><a href="#example-6-case-insensitive-mapping">Example 6: Case-Insensitive Mapping</a></li>
-<li><a href="#example-7-common-frequency-grid">Example 7: Common Frequency Grid</a></li>
+<li><a href="#example-1-basic-multiplechamber-workflow">Example 1: Basic MultipleChamber Workflow</a></li>
+<li><a href="#example-2-complete-example-script">Example 2: Complete Example Script</a></li>
+<li><a href="#example-3-directory-structure-of-the-output">Example 3: Directory Structure of the Output</a></li>
+<li><a href="#example-4-per-chamber-impedance-files">Example 4: Per-Chamber Impedance Files</a></li>
+<li><a href="#example-5-plotting-individual-elements">Example 5: Plotting Individual Elements</a></li>
+<li><a href="#example-6-total-impedance-summation">Example 6: Total Impedance Summation</a></li>
+<li><a href="#example-7-case-insensitive-mapping">Example 7: Case-Insensitive Mapping</a></li>
+<li><a href="#example-8-common-frequency-grid">Example 8: Common Frequency Grid</a></li>
+<li><a href="#api-reference">API Reference</a>
+<ul>
+<li><a href="#multiplechamber-methods">MultipleChamber Methods</a></li>
+<li><a href="#workflow">Workflow</a></li>
+</ul></li>
 <li><a href="#notes-and-best-practices">Notes and Best Practices</a></li>
 </ul></li>
 </ul>
@@ -193,9 +199,9 @@
 <p><strong>Multiple-Chamber Impedance Calculation Using Lattice Aperture and Geometry Files</strong></p>
 <h2 id="authors">Authors</h2>
 <ul>
-<li><strong>Tatiana Rijoff</strong> – tatiana.rijoff@gmail.com<br />
+<li><strong>Tatiana Rijoff</strong> — tatiana.rijoff@gmail.com<br />
 </li>
-<li><strong>Carlo Zannini</strong> – carlo.zannini@cern.ch</li>
+<li><strong>Carlo Zannini</strong> — carlo.zannini@cern.ch</li>
 </ul>
 <p><em>Copyright: CERN</em></p>
 <hr />
@@ -244,13 +250,14 @@
 <ul>
 <li><a href="#overview">Overview</a></li>
 <li><a href="#input-files">Input Files</a></li>
-<li><a href="#example-1-running-multiplechamber">Example 1: Running MultipleChamber</a></li>
-<li><a href="#example-2-directory-structure-of-the-output">Example 2: Directory Structure of the Output</a></li>
-<li><a href="#example-3-per-chamber-impedance-files">Example 3: Per-Chamber Impedance Files</a></li>
-<li><a href="#example-4-automatic-impedance-plots">Example 4: Automatic Impedance Plots</a></li>
-<li><a href="#example-5-total-impedance-summation">Example 5: Total Impedance Summation</a></li>
-<li><a href="#example-6-case-insensitive-mapping">Example 6: Case-Insensitive Mapping</a></li>
-<li><a href="#example-7-common-frequency-grid">Example 7: Common Frequency Grid</a></li>
+<li><a href="#example-1-basic-multiplechamber-workflow">Example 1: Basic MultipleChamber Workflow</a></li>
+<li><a href="#example-2-complete-example-script">Example 2: Complete Example Script</a></li>
+<li><a href="#example-3-directory-structure-of-the-output">Example 3: Directory Structure of the Output</a></li>
+<li><a href="#example-4-per-chamber-impedance-files">Example 4: Per-Chamber Impedance Files</a></li>
+<li><a href="#example-5-plotting-individual-elements">Example 5: Plotting Individual Elements</a></li>
+<li><a href="#example-6-total-impedance-summation">Example 6: Total Impedance Summation</a></li>
+<li><a href="#example-7-case-insensitive-mapping">Example 7: Case-Insensitive Mapping</a></li>
+<li><a href="#example-8-common-frequency-grid">Example 8: Common Frequency Grid</a></li>
 <li><a href="#notes-and-best-practices">Notes and Best Practices</a></li>
 </ul>
 <hr />
@@ -329,17 +336,25 @@ Round.cfg
 Diamond.cfg</code></pre>
 <p>Names are matched <strong>case-insensitively</strong>, both as dictionary keys and as filenames.</p>
 <hr />
-<h2 id="example-1-running-multiplechamber">Example 1: Running MultipleChamber</h2>
+<h2 id="example-1-basic-multiplechamber-workflow">Example 1: Basic MultipleChamber Workflow</h2>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pytlwall <span class="im">import</span> MultipleChamber</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>mc <span class="op">=</span> MultipleChamber(</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    apertype_file<span class="op">=</span><span class="st">&quot;apertype2.txt&quot;</span>,</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    geom_file<span class="op">=</span><span class="st">&quot;b_L_betax_betay.txt&quot;</span>,</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    input_dir<span class="op">=</span><span class="st">&quot;./examples/ex_multiple/&quot;</span>,</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    out_dir<span class="op">=</span><span class="st">&quot;output&quot;</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>mc.run()</span></code></pre></div>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create MultipleChamber instance</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>mc <span class="op">=</span> MultipleChamber(</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    apertype_file<span class="op">=</span><span class="st">&quot;apertype2.txt&quot;</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    geom_file<span class="op">=</span><span class="st">&quot;b_L_betax_betay.txt&quot;</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    input_dir<span class="op">=</span><span class="st">&quot;./input/&quot;</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    out_dir<span class="op">=</span><span class="st">&quot;./output/&quot;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Load input files (lightweight operation)</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>mc.load()</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: Calculate impedances for all lattice elements</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>mc.calculate_all()</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Plot total accumulated impedances</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>mc.plot_totals(show<span class="op">=</span><span class="va">False</span>)</span></code></pre></div>
 <p>Key features:</p>
 <ul>
 <li>All files are read from <code>input_dir</code></li>
@@ -349,7 +364,63 @@ Diamond.cfg</code></pre>
 <li>Automatically generates plots for non-zero impedances</li>
 </ul>
 <hr />
-<h2 id="example-2-directory-structure-of-the-output">Example 2: Directory Structure of the Output</h2>
+<h2 id="example-2-complete-example-script">Example 2: Complete Example Script</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env python3</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;Multiple chamber impedance calculation example.&quot;&quot;&quot;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pytlwall <span class="im">import</span> MultipleChamber</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Run the multiple chamber example workflow.&quot;&quot;&quot;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    input_dir <span class="op">=</span> Path(<span class="st">&quot;./examples/ex_multiple&quot;</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    output_dir <span class="op">=</span> Path(<span class="st">&quot;./output_multiple&quot;</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;=&quot;</span> <span class="op">*</span> <span class="dv">60</span>)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Multiple Chamber Impedance Calculation Example&quot;</span>)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;=&quot;</span> <span class="op">*</span> <span class="dv">60</span>)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;Input directory:  </span><span class="sc">{</span>input_dir<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;Output directory: </span><span class="sc">{</span>output_dir<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check required files exist</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> input_dir.is_dir():</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">SystemExit</span>(<span class="ss">f&quot;Error: input directory not found: </span><span class="sc">{</span>input_dir<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    required <span class="op">=</span> [<span class="st">&quot;apertype2.txt&quot;</span>, <span class="st">&quot;b_L_betax_betay.txt&quot;</span>]</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    missing <span class="op">=</span> [name <span class="cf">for</span> name <span class="kw">in</span> required <span class="cf">if</span> <span class="kw">not</span> (input_dir <span class="op">/</span> name).exists()]</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> missing:</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">SystemExit</span>(<span class="ss">f&quot;Error: missing required files: </span><span class="sc">{</span>missing<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create output directory</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    output_dir.mkdir(parents<span class="op">=</span><span class="va">True</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Initialize MultipleChamber</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    mc <span class="op">=</span> MultipleChamber(</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>        apertype_file<span class="op">=</span><span class="st">&quot;apertype2.txt&quot;</span>,</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>        geom_file<span class="op">=</span><span class="st">&quot;b_L_betax_betay.txt&quot;</span>,</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>        input_dir<span class="op">=</span>input_dir,</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>        out_dir<span class="op">=</span>output_dir,</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Load inputs (lightweight)</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>    mc.load()</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Perform the full calculation for all lattice elements</span></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>    mc.calculate_all()</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Plot total accumulated impedances (saved under out_dir/total)</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>    mc.plot_totals(show<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Optional: plot individual elements</span></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> mc.n_elements <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>        mc.plot_element(<span class="dv">0</span>, show<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="ch">\n</span><span class="ss">Done. Results written to: </span><span class="sc">{</span>output_dir<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&quot;__main__&quot;</span>:</span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>    main()</span></code></pre></div>
+<hr />
+<h2 id="example-3-directory-structure-of-the-output">Example 3: Directory Structure of the Output</h2>
 <p>After running the example:</p>
 <pre><code>output/
     chamber001/
@@ -380,7 +451,7 @@ Diamond.cfg</code></pre>
 <li>The total directory contains summed impedances and their plots</li>
 </ul>
 <hr />
-<h2 id="example-3-per-chamber-impedance-files">Example 3: Per-Chamber Impedance Files</h2>
+<h2 id="example-4-per-chamber-impedance-files">Example 4: Per-Chamber Impedance Files</h2>
 <p>Each file <code>impedance.xlsx</code> contains:</p>
 <table>
 <thead>
@@ -418,35 +489,37 @@ Diamond.cfg</code></pre>
 </table>
 <p>All impedances are exported using <code>io_util.export_impedance</code>.</p>
 <hr />
-<h2 id="example-4-automatic-impedance-plots">Example 4: Automatic Impedance Plots</h2>
-<p>Plots are generated using:</p>
-<pre><code>plot_util.plot_Z_vs_f_simple()</code></pre>
-<p>Only impedances that are <strong>not identically zero or NaN</strong> are plotted.</p>
-<p>Example internal call:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plot_util.plot_Z_vs_f_simple(</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    f<span class="op">=</span>freqs,</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    Z<span class="op">=</span>Z,</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    imped_type<span class="op">=</span><span class="st">&quot;L&quot;</span>,</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">&quot;Chamber 001 – ZLong&quot;</span>,</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    savedir<span class="op">=</span><span class="st">&quot;output/chamber001&quot;</span>,</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    savename<span class="op">=</span><span class="st">&quot;ZLong.png&quot;</span>,</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    xscale<span class="op">=</span><span class="st">&quot;log&quot;</span>,</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    yscale<span class="op">=</span><span class="st">&quot;log&quot;</span>,</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p>Plots are saved inside each chamber directory with filenames like:</p>
-<ul>
-<li><code>ZLong.png</code></li>
-<li><code>ZTrans.png</code></li>
-<li><code>ZDipX.png</code></li>
-<li>…</li>
-</ul>
+<h2 id="example-5-plotting-individual-elements">Example 5: Plotting Individual Elements</h2>
+<p>To plot the impedance of a specific lattice element:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pytlwall <span class="im">import</span> MultipleChamber</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>mc <span class="op">=</span> MultipleChamber(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    apertype_file<span class="op">=</span><span class="st">&quot;apertype2.txt&quot;</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    geom_file<span class="op">=</span><span class="st">&quot;b_L_betax_betay.txt&quot;</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    input_dir<span class="op">=</span><span class="st">&quot;./input/&quot;</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    out_dir<span class="op">=</span><span class="st">&quot;./output/&quot;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>mc.load()</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>mc.calculate_all()</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot element 0 (first element)</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>mc.plot_element(<span class="dv">0</span>, show<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot element 5</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>mc.plot_element(<span class="dv">5</span>, show<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot multiple elements</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">min</span>(<span class="dv">5</span>, mc.n_elements)):</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    mc.plot_element(i, show<span class="op">=</span><span class="va">False</span>)</span></code></pre></div>
+<p>The <code>show=False</code> parameter saves plots to disk without displaying them interactively.</p>
 <hr />
-<h2 id="example-5-total-impedance-summation">Example 5: Total Impedance Summation</h2>
+<h2 id="example-6-total-impedance-summation">Example 6: Total Impedance Summation</h2>
 <p>After processing all chambers:</p>
 <pre><code>Z_total[name] = Σ (Z_element[name])</code></pre>
 <p>Results are saved to:</p>
 <pre><code>output/total/total_impedance.xlsx</code></pre>
-<p>Plots generated:</p>
+<p>Plots generated by <code>mc.plot_totals()</code>:</p>
 <ul>
 <li><code>ZLong_tot.png</code></li>
 <li><code>ZTrans_tot.png</code></li>
@@ -455,7 +528,7 @@ Diamond.cfg</code></pre>
 <li>…</li>
 </ul>
 <hr />
-<h2 id="example-6-case-insensitive-mapping">Example 6: Case-Insensitive Mapping</h2>
+<h2 id="example-7-case-insensitive-mapping">Example 7: Case-Insensitive Mapping</h2>
 <p>Mapping used:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>DEFAULT_APERTYPE_TO_CFG <span class="op">=</span> {</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Oblong&quot;</span>: <span class="st">&quot;Oblong.cfg&quot;</span>,</span>
@@ -471,7 +544,7 @@ Diamond.cfg</code></pre>
 <p>are matched ignoring case.</p>
 <p>This ensures robustness in large-scale workflows.</p>
 <hr />
-<h2 id="example-7-common-frequency-grid">Example 7: Common Frequency Grid</h2>
+<h2 id="example-8-common-frequency-grid">Example 8: Common Frequency Grid</h2>
 <p>To guarantee element-by-element impedance summation:</p>
 <ul>
 <li>The frequency grid of the <strong>first</strong> processed element is stored</li>
@@ -487,6 +560,53 @@ Diamond.cfg</code></pre>
 <li>identical interpolation-free workflow</li>
 </ul>
 <hr />
+<h2 id="api-reference">API Reference</h2>
+<h3 id="multiplechamber-methods">MultipleChamber Methods</h3>
+<table>
+<colgroup>
+<col style="width: 38%" />
+<col style="width: 61%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>__init__(apertype_file, geom_file, input_dir, out_dir)</code></td>
+<td>Initialize with input file paths</td>
+</tr>
+<tr class="even">
+<td><code>load()</code></td>
+<td>Load aperture types, geometry, and configuration files</td>
+</tr>
+<tr class="odd">
+<td><code>calculate_all()</code></td>
+<td>Calculate impedances for all lattice elements</td>
+</tr>
+<tr class="even">
+<td><code>plot_totals(show=False)</code></td>
+<td>Plot total accumulated impedances</td>
+</tr>
+<tr class="odd">
+<td><code>plot_element(index, show=False)</code></td>
+<td>Plot impedance for a specific element</td>
+</tr>
+<tr class="even">
+<td><code>n_elements</code></td>
+<td>Property: number of lattice elements</td>
+</tr>
+</tbody>
+</table>
+<h3 id="workflow">Workflow</h3>
+<pre><code>1. __init__()     →  Set up file paths
+2. load()         →  Read input files, validate data
+3. calculate_all() →  Compute impedances for all elements
+4. plot_totals()  →  Generate total impedance plots
+5. plot_element() →  (Optional) Plot individual elements</code></pre>
+<hr />
 <h2 id="notes-and-best-practices">Notes and Best Practices</h2>
 <ul>
 <li><code>apertype2.txt</code> and <code>b_L_betax_betay.txt</code> must have the <strong>same number of lines</strong></li>
@@ -494,6 +614,8 @@ Diamond.cfg</code></pre>
 <li><code>.cfg</code> files may define different frequencies, but only the first is used</li>
 <li>Use the <code>total/</code> directory for cross-checks and global validation</li>
 <li>Ensure <code>input_dir</code> contains all <code>.cfg</code> files required by the mapping</li>
+<li>Always call <code>load()</code> before <code>calculate_all()</code></li>
+<li>Use <code>show=False</code> for batch processing to avoid interactive plot windows</li>
 </ul>
 <hr />
 <p><strong><a href="EXAMPLES.html">◀ Back to Examples</a></strong></p>

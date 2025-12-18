@@ -9,15 +9,15 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "pytlwall"
 version = "1.0.0"
-description = "Transmission line impedance calculation engine"
+description = "Transmission line impedance calculation engine with GUI"
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
-    {name = "Tatiana Rijoff", email = "tatiana.rijoff@cern.ch"},
-    {name = "Carlo Zannini"},
+    {name = "Tatiana Rijoff", email = "tatiana.rijoff@gmail.com"},
+    {name = "Carlo Zannini", email = "carlo.zannini@cern.ch"},
 ]
 maintainers = [
-    {name = "Tatiana Rijoff", email = "tatiana.rijoff@cern.ch"},
+    {name = "Tatiana Rijoff", email = "tatiana.rijoff@gmail.com"},
 ]
 keywords = ["impedance", "transmission line", "accelerator physics", "CERN", "beam dynamics"]
 classifiers = [
@@ -37,13 +37,21 @@ classifiers = [
     "Natural Language :: English",
 ]
 requires-python = ">=3.8"
+
+# Core dependencies (without GUI)
 dependencies = [
     "numpy>=1.20.0",
     "scipy>=1.7.0",
     "matplotlib>=3.3.0",
+    "openpyxl>=3.0.0",
 ]
 
 [project.optional-dependencies]
+# GUI dependencies
+gui = [
+    "PyQt5>=5.15.0",
+]
+# Development dependencies
 dev = [
     "pytest>=7.0",
     "pytest-cov>=3.0",
@@ -52,14 +60,28 @@ dev = [
     "mypy>=0.950",
     "ruff>=0.1.0",
 ]
+# Documentation dependencies
 docs = [
     "sphinx>=4.0",
     "sphinx-rtd-theme>=1.0",
     "myst-parser>=0.18",
 ]
+# Test dependencies
 test = [
     "pytest>=7.0",
     "pytest-cov>=3.0",
+]
+# All optional dependencies
+all = [
+    "PyQt5>=5.15.0",
+    "pytest>=7.0",
+    "pytest-cov>=3.0",
+    "black>=22.0",
+    "flake8>=4.0",
+    "mypy>=0.950",
+    "ruff>=0.1.0",
+    "sphinx>=4.0",
+    "sphinx-rtd-theme>=1.0",
 ]
 
 [project.urls]
@@ -70,8 +92,12 @@ Issues = "https://github.com/CERN/pytlwall/issues"
 Changelog = "https://github.com/CERN/pytlwall/blob/main/CHANGELOG.md"
 
 [project.scripts]
-# Uncomment if you want a CLI command
-# pytlwall = "exec_pytlwall:main"
+# Command-line entry point
+pytlwall = "pytlwall.__main__:main"
+
+[project.gui-scripts]
+# GUI entry point (Windows)
+pytlwall-gui = "pytlwall_gui.main:main"
 
 [tool.setuptools]
 zip-safe = false
@@ -79,7 +105,7 @@ include-package-data = true
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["pytlwall*"]
+include = ["pytlwall*", "pytlwall_gui*"]
 exclude = ["tests*", "examples*", "docs*"]
 
 [tool.setuptools.package-data]
@@ -87,6 +113,12 @@ pytlwall = [
     "yokoya_factors/*.txt",
     "yokoya_factors/*.dat",
     "yokoya_factors/*.csv",
+]
+pytlwall_gui = [
+    "*.png",
+    "*.ico",
+    "*.svg",
+    "resources/*",
 ]
 
 # ============================================================================
@@ -161,7 +193,7 @@ follow_imports = "normal"
 ignore_missing_imports = true
 
 [tool.coverage.run]
-source = ["pytlwall"]
+source = ["pytlwall", "pytlwall_gui"]
 omit = [
     "*/tests/*",
     "*/examples/*",

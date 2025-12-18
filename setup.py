@@ -3,6 +3,9 @@ Setup script for pytlwall package.
 
 pytlwall is a Python implementation for calculating resistive wall impedance
 using transmission line theory, originally developed at CERN.
+
+This setup includes both the core pytlwall library and the pytlwall_gui
+graphical interface.
 """
 
 from setuptools import setup, find_packages
@@ -32,7 +35,7 @@ setup(
     # Package metadata
     name="pytlwall",
     version=version,
-    description="Transmission line impedance calculation engine",
+    description="Transmission line impedance calculation engine with GUI",
     long_description=long_description,
     long_description_content_type="text/markdown",
     
@@ -43,7 +46,7 @@ setup(
     maintainer_email="tatiana.rijoff@gmail.com",
     
     # URLs
-    url="https://github.com/CERN/pytlwall",  # TODO Update with actual URL
+    url="https://github.com/CERN/pytlwall",
     project_urls={
         "Bug Reports": "https://github.com/CERN/pytlwall/issues",
         "Source": "https://github.com/CERN/pytlwall",
@@ -85,37 +88,65 @@ setup(
     ],
     
     # Keywords for search
-    keywords="impedance, transmission line, accelerator physics, CERN, beam dynamics",
+    keywords="impedance, transmission line, accelerator physics, CERN, beam dynamics, GUI",
     
-    # Package discovery
-    packages=find_packages(exclude=["tests", "tests.*", "examples", "examples.*"]),
+    # Package discovery - include both pytlwall and pytlwall_gui
+    packages=find_packages(
+        exclude=["tests", "tests.*", "examples", "examples.*", "docs", "docs.*"]
+    ),
     
     # Python version requirement
     python_requires=">=3.8",
     
-    # Dependencies
+    # Core dependencies (without GUI)
     install_requires=[
         "numpy>=1.20.0",
         "scipy>=1.7.0",
         "matplotlib>=3.3.0",
+        "openpyxl>=3.0.0",
     ],
     
     # Optional dependencies
     extras_require={
+        # GUI requires PyQt5
+        "gui": [
+            "PyQt5>=5.15.0",
+        ],
+        # Development tools
         "dev": [
             "pytest>=7.0",
             "pytest-cov>=3.0",
             "black>=22.0",
             "flake8>=4.0",
             "mypy>=0.950",
+            "ruff>=0.1.0",
         ],
+        # Documentation
         "docs": [
+            "sphinx>=4.0",
+            "sphinx-rtd-theme>=1.0",
+            "myst-parser>=0.18",
+        ],
+        # Testing
+        "test": [
+            "pytest>=7.0",
+            "pytest-cov>=3.0",
+        ],
+        # All optional dependencies
+        "all": [
+            "PyQt5>=5.15.0",
+            "pytest>=7.0",
+            "pytest-cov>=3.0",
+            "black>=22.0",
+            "flake8>=4.0",
+            "mypy>=0.950",
+            "ruff>=0.1.0",
             "sphinx>=4.0",
             "sphinx-rtd-theme>=1.0",
         ],
     },
     
-    # Package data - include Yokoya factors and other data files
+    # Package data - include Yokoya factors and GUI resources
     include_package_data=True,
     package_data={
         "pytlwall": [
@@ -123,12 +154,22 @@ setup(
             "yokoya_factors/*.dat",
             "yokoya_factors/*.csv",
         ],
+        "pytlwall_gui": [
+            "*.png",
+            "*.ico",
+            "*.svg",
+            "resources/*",
+            "logo.png",
+        ],
     },
     
-    # Entry points for command-line scripts (if needed)
+    # Entry points for command-line scripts
     entry_points={
         "console_scripts": [
-            "pytlwall=exec_pytlwall:main",  # If you want a CLI command
+            "pytlwall=pytlwall.__main__:main",
+        ],
+        "gui_scripts": [
+            "pytlwall-gui=pytlwall_gui.main:main",
         ],
     },
     

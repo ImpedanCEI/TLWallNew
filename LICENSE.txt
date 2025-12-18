@@ -23,6 +23,6 @@ SOFTWARE.
 ---
 
 Original MATLAB implementation: Carlo Zannini (2011)
-Python port and development: Tatiana Rijoff, CERN BE-ABP-CER (2013-present)
+Python port and development: Tatiana Rijoff (2013-present)
 
 For more information, visit: https://www.cern.ch

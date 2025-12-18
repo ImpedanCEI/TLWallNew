@@ -91,19 +91,32 @@
             </div>
             <div class="nav-section-content toc-content">
                 <ul>
-<li><a href="#pytlwall-theory">PyTlWall theory</a>
+<li><a href="#pytlwall-theory">PyTlWall Theory</a>
 <ul>
+<li><a href="#authors">Authors</a></li>
+<li><a href="#overview">Overview</a></li>
 <li><a href="#background">Background</a></li>
-<li><a href="#multilayer-wall-as-a-recursive-transmission-line">Multilayer wall as a recursive transmission line</a>
+<li><a href="#multilayer-wall-as-a-recursive-transmission-line">Multilayer Wall as a Recursive Transmission Line</a>
 <ul>
-<li><a href="#physical-model">Physical model</a></li>
-<li><a href="#equivalent-surface-impedance">Equivalent surface impedance</a></li>
+<li><a href="#physical-model">Physical Model</a></li>
+<li><a href="#equivalent-surface-impedance">Equivalent Surface Impedance</a></li>
 </ul></li>
-<li><a href="#applicability-and-tlwall-hypothesis">Applicability and TLwall hypothesis</a></li>
-<li><a href="#transverse-impedance-and-the-inductive-bypass-vos">Transverse impedance and the inductive bypass (Vos)</a></li>
-<li><a href="#benchmarks-and-reference-solutions">Benchmarks and reference solutions</a></li>
-<li><a href="#when-tlwall-is-convenient">When TLwall is convenient</a></li>
-<li><a href="#references-mentioned-in-the-slides">References mentioned in the slides</a></li>
+<li><a href="#applicability-and-tlwall-hypothesis">Applicability and TLwall Hypothesis</a></li>
+<li><a href="#transverse-impedance-and-the-inductive-bypass-vos">Transverse Impedance and the Inductive Bypass (Vos)</a></li>
+<li><a href="#impedance-types">Impedance Types</a>
+<ul>
+<li><a href="#base-impedances-wall-contribution">Base Impedances (Wall Contribution)</a></li>
+<li><a href="#total-impedances-wall-space-charge">Total Impedances (Wall + Space Charge)</a></li>
+<li><a href="#space-charge-contributions">Space Charge Contributions</a></li>
+<li><a href="#surface-impedances">Surface Impedances</a></li>
+</ul></li>
+<li><a href="#benchmarks-and-reference-solutions">Benchmarks and Reference Solutions</a>
+<ul>
+<li><a href="#validation-notes">Validation Notes</a></li>
+</ul></li>
+<li><a href="#when-tlwall-is-convenient">When TLwall is Convenient</a></li>
+<li><a href="#chamber-shapes">Chamber Shapes</a></li>
+<li><a href="#references">References</a></li>
 </ul></li>
 </ul>
             </div>
@@ -118,56 +131,228 @@
 <p class="author">Carlo Zannini</p>
 </header>
 
-<h1 id="pytlwall-theory">PyTlWall theory</h1>
-<p>This page summarizes the theoretical model implemented in <strong>PyTlWall/TLwall</strong> for computing resistive-wall beam coupling impedance in <strong>multilayer</strong> vacuum chambers, and collects the key assumptions and validity limits discussed in the original TLwall internal presentation (HSC, 2021). fileciteturn1file0</p>
+<h1 id="pytlwall-theory">PyTlWall Theory</h1>
+<p><strong>Theoretical foundations of the transmission-line wall impedance model</strong></p>
+<h2 id="authors">Authors</h2>
+<ul>
+<li><strong>Tatiana Rijoff</strong> — tatiana.rijoff@gmail.com<br />
+</li>
+<li><strong>Carlo Zannini</strong> — carlo.zannini@cern.ch</li>
+</ul>
+<p><em>Copyright: CERN</em></p>
+<hr />
+<h2 id="overview">Overview</h2>
+<p>This page summarizes the theoretical model implemented in <strong>PyTlWall</strong> for computing resistive-wall beam coupling impedance in <strong>multilayer</strong> vacuum chambers, and collects the key assumptions and validity limits.</p>
+<hr />
 <h2 id="background">Background</h2>
 <p>The TLwall approach builds on the <strong>transmission-line (TL)</strong> analogy for layered media (planar case), extended to circular chambers through a controlled approximation, and on the <strong>inductive bypass</strong> concept introduced by <strong>L. Vos</strong> for the transverse impedance in the resistive-wall problem.</p>
-<p>A main goal is to provide a <strong>fast and robust</strong> way to compute: - longitudinal impedance, - transverse (dipolar / quadrupolar) impedance, - equivalent multilayer <strong>surface impedance</strong>,</p>
+<p>A main goal is to provide a <strong>fast and robust</strong> way to compute:</p>
+<ul>
+<li>longitudinal impedance</li>
+<li>transverse (dipolar / quadrupolar) impedance</li>
+<li>equivalent multilayer <strong>surface impedance</strong></li>
+</ul>
 <p>for <strong>PEC / vacuum / material</strong> boundary conditions, with optional extension to non-ultrarelativistic beams.</p>
-<h2 id="multilayer-wall-as-a-recursive-transmission-line">Multilayer wall as a recursive transmission line</h2>
-<h3 id="physical-model">Physical model</h3>
+<hr />
+<h2 id="multilayer-wall-as-a-recursive-transmission-line">Multilayer Wall as a Recursive Transmission Line</h2>
+<h3 id="physical-model">Physical Model</h3>
 <p>A round chamber of radius <em>b</em> is loaded by a stack of layers (conductors/dielectrics) and terminated by a boundary condition (PEC, vacuum, or material half-space). Each layer is represented by a TL segment with its own propagation constant and characteristic impedance.</p>
 <p>The TL equations can be applied <strong>recursively</strong> to any number of layers to obtain the <strong>equivalent surface impedance</strong> seen at the vacuum–wall interface.</p>
 <blockquote>
-<p>Practical note: in PyTlWall the same equivalent surface impedance can then be mapped to non-circular cross-sections using <strong>Yokoya form factors</strong> (rectangular/elliptical approximations).</p>
+<p><strong>Practical note:</strong> In PyTlWall the same equivalent surface impedance can then be mapped to non-circular cross-sections using <strong>Yokoya form factors</strong> (rectangular/elliptical approximations).</p>
 </blockquote>
-<h3 id="equivalent-surface-impedance">Equivalent surface impedance</h3>
-<p>The computation returns an equivalent surface impedance (Z_s()) of the full multilayer stack. This is then used through the <strong>Leontovich boundary condition</strong> to relate tangential electric and magnetic fields at the interface, and to compute the beam coupling impedance.</p>
-<h2 id="applicability-and-tlwall-hypothesis">Applicability and TLwall hypothesis</h2>
+<h3 id="equivalent-surface-impedance">Equivalent Surface Impedance</h3>
+<p>The computation returns an equivalent surface impedance Z_s(ω) of the full multilayer stack. This is then used through the <strong>Leontovich boundary condition</strong> to relate tangential electric and magnetic fields at the interface, and to compute the beam coupling impedance.</p>
+<hr />
+<h2 id="applicability-and-tlwall-hypothesis">Applicability and TLwall Hypothesis</h2>
 <p>Transmission-line equations are exact for <strong>planar geometries</strong>. In circular structures they remain usable when the <strong>attenuation of cylindrical waves</strong> inside the wall can be neglected, so that the equivalent surface impedance is effectively independent of the incident-wave direction.</p>
 <p>A commonly used sufficient condition is:</p>
 <ul>
-<li><strong>skin depth</strong> (b)</li>
+<li><strong>skin depth</strong> δ ≪ b</li>
 </ul>
 <p>The TLwall implementation also estimates a <strong>maximum frequency</strong> up to which the TL approximation is expected to remain accurate for a given configuration.</p>
-<h2 id="transverse-impedance-and-the-inductive-bypass-vos">Transverse impedance and the inductive bypass (Vos)</h2>
-<p>For the transverse impedance, TLwall uses the <strong>inductive bypass</strong> concept (Vos formalism), which introduces an additional inductive contribution (often denoted (L_1)) to capture the transverse coupling consistently within the TL approach.</p>
+<hr />
+<h2 id="transverse-impedance-and-the-inductive-bypass-vos">Transverse Impedance and the Inductive Bypass (Vos)</h2>
+<p>For the transverse impedance, TLwall uses the <strong>inductive bypass</strong> concept (Vos formalism), which introduces an additional inductive contribution (often denoted L₁) to capture the transverse coupling consistently within the TL approach.</p>
 <p>In the ultrarelativistic limit, a common constant appearing in the formalism is:</p>
-<p>[ L_1 = rac{_0}{4} ]</p>
+<pre><code>L₁ = μ₀ / (4π)</code></pre>
 <p>The method is extended in the code to cover the <strong>non-ultrarelativistic</strong> regime with improved approximations for the field radial dependence and related corrections.</p>
-<h2 id="benchmarks-and-reference-solutions">Benchmarks and reference solutions</h2>
+<hr />
+<h2 id="impedance-types">Impedance Types</h2>
+<p>PyTlWall computes several types of impedances:</p>
+<h3 id="base-impedances-wall-contribution">Base Impedances (Wall Contribution)</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Impedance</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>ZLong</strong></td>
+<td>Longitudinal impedance</td>
+</tr>
+<tr class="even">
+<td><strong>ZTrans</strong></td>
+<td>Transverse impedance</td>
+</tr>
+<tr class="odd">
+<td><strong>ZDipX</strong></td>
+<td>Horizontal dipolar impedance</td>
+</tr>
+<tr class="even">
+<td><strong>ZDipY</strong></td>
+<td>Vertical dipolar impedance</td>
+</tr>
+<tr class="odd">
+<td><strong>ZQuadX</strong></td>
+<td>Horizontal quadrupolar impedance</td>
+</tr>
+<tr class="even">
+<td><strong>ZQuadY</strong></td>
+<td>Vertical quadrupolar impedance</td>
+</tr>
+</tbody>
+</table>
+<h3 id="total-impedances-wall-space-charge">Total Impedances (Wall + Space Charge)</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Impedance</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>ZLongTotal</strong></td>
+<td>Total longitudinal (wall + space charge)</td>
+</tr>
+<tr class="even">
+<td><strong>ZTransTotal</strong></td>
+<td>Total transverse (wall + space charge)</td>
+</tr>
+<tr class="odd">
+<td><strong>ZDipXTotal</strong>, <strong>ZDipYTotal</strong></td>
+<td>Total dipolar</td>
+</tr>
+<tr class="even">
+<td><strong>ZQuadXTotal</strong>, <strong>ZQuadYTotal</strong></td>
+<td>Total quadrupolar</td>
+</tr>
+</tbody>
+</table>
+<h3 id="space-charge-contributions">Space Charge Contributions</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Impedance</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>ZLongDSC</strong></td>
+<td>Direct space charge (longitudinal)</td>
+</tr>
+<tr class="even">
+<td><strong>ZLongISC</strong></td>
+<td>Indirect/image space charge (longitudinal)</td>
+</tr>
+<tr class="odd">
+<td><strong>ZTransDSC</strong></td>
+<td>Direct space charge (transverse)</td>
+</tr>
+<tr class="even">
+<td><strong>ZTransISC</strong></td>
+<td>Indirect/image space charge (transverse)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="surface-impedances">Surface Impedances</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Impedance</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>ZLongSurf</strong></td>
+<td>Surface longitudinal impedance</td>
+</tr>
+<tr class="even">
+<td><strong>ZTransSurf</strong></td>
+<td>Surface transverse impedance</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="benchmarks-and-reference-solutions">Benchmarks and Reference Solutions</h2>
 <p>TLwall has been benchmarked against <strong>ReWall</strong> and <strong>IW2D</strong>.</p>
 <ul>
 <li><strong>IW2D</strong> should be regarded as the reference when the highest fidelity is needed, because it solves Maxwell equations without the TL approximation.</li>
 <li>TLwall typically agrees well in practical cases; for some parameter sets, the validity is restricted to a limited frequency range (as per the TLwall hypothesis).</li>
 </ul>
-<h2 id="when-tlwall-is-convenient">When TLwall is convenient</h2>
+<h3 id="validation-notes">Validation Notes</h3>
+<ul>
+<li><code>ZLong</code>, <code>ZTrans</code>, <code>ZLongTotal</code> show good agreement with IW2D</li>
+<li><code>ZDipX</code>, <code>ZDipY</code>, <code>ZQuadX</code>, <code>ZQuadY</code> (wall contributions) are consistent with IW2D</li>
+<li>Total transverse impedances (<code>ZTransTotal</code>, <code>ZDipXTotal</code>, etc.) may show discrepancies in some configurations</li>
+</ul>
+<hr />
+<h2 id="when-tlwall-is-convenient">When TLwall is Convenient</h2>
 <p>Typical cases where TLwall is particularly attractive:</p>
 <ul>
-<li>building an impedance model from an aperture model (many elements → many evaluations),</li>
-<li>very large number of layers (e.g. metamaterial-like stacks),</li>
-<li>avoiding numerical difficulties that can arise in other methods,</li>
-<li>simulating ideal boundary conditions or very low resistivity,</li>
-<li>using the computed surface impedance as an input to more complex calculations,</li>
-<li>including roughness effects through simple surface-impedance modifications (basic Hammerstad model included in the referenced slides).</li>
+<li>Building an impedance model from an aperture model (many elements → many evaluations)</li>
+<li>Very large number of layers (e.g. metamaterial-like stacks)</li>
+<li>Avoiding numerical difficulties that can arise in other methods</li>
+<li>Simulating ideal boundary conditions or very low resistivity</li>
+<li>Using the computed surface impedance as an input to more complex calculations</li>
+<li>Including roughness effects through simple surface-impedance modifications</li>
 </ul>
-</details>
-<h2 id="references-mentioned-in-the-slides">References mentioned in the slides</h2>
-<ul>
-<li>L. Vos, resistive wall impedance calculations (CERN-AB-2003-093).</li>
-<li>IW2D (field-matching technique) as reference solver.</li>
-<li>“Resistive wall impedance in elliptical multilayer vacuum chambers”, <em>Phys. Rev. Accel. Beams</em> 22, 121001 (2019).</li>
-</ul>
+<hr />
+<h2 id="chamber-shapes">Chamber Shapes</h2>
+<p>PyTlWall supports three chamber cross-sections:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Shape</th>
+<th>Description</th>
+<th>Yokoya Factors</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>CIRCULAR</strong></td>
+<td>Round pipe</td>
+<td>No correction needed</td>
+</tr>
+<tr class="even">
+<td><strong>ELLIPTICAL</strong></td>
+<td>Elliptical cross-section</td>
+<td>Interpolated from tables</td>
+</tr>
+<tr class="odd">
+<td><strong>RECTANGULAR</strong></td>
+<td>Flat chamber</td>
+<td>Interpolated from tables</td>
+</tr>
+</tbody>
+</table>
+<p>For non-circular chambers, <strong>Yokoya form factors</strong> are applied to scale the impedances computed for the equivalent circular case.</p>
+<hr />
+<h2 id="references">References</h2>
+<ol type="1">
+<li><p>L. Vos, “The transverse impedance of a cylindrical pipe with arbitrary surface impedance”, CERN-AB-2003-093 (ABP), 2003.</p></li>
+<li><p>N. Mounet, E. Métral, “Electromagnetic field created by a macroparticle in an infinitely long and axially symmetric multilayer beam pipe”, CERN-BE-2009-039, 2009.</p></li>
+<li><p>C. Zannini, “Electromagnetic Simulation of CERN Accelerator Components and Experimental Applications”, PhD Thesis, EPFL, 2013.</p></li>
+<li><p>N. Mounet et al., “Resistive wall impedance in elliptical multilayer vacuum chambers”, <em>Phys. Rev. Accel. Beams</em> 22, 121001 (2019).</p></li>
+<li><p>IW2D — Impedance Wake 2D, field-matching technique reference solver.</p></li>
+</ol>
+<hr />
+<p><em>Last updated: December 2025</em></p>
 
     </main>
 </div>

@@ -97,8 +97,12 @@
 <ul>
 <li><a href="#add-remove-chambers">Add / remove chambers</a></li>
 <li><a href="#chamber-tree-structure">Chamber tree structure</a></li>
-<li><a href="#drag-drop-format-advanced">Drag &amp; drop format (advanced)</a></li>
+<li><a href="#impedance-categories-and-order">Impedance categories and order</a></li>
+<li><a href="#mandatory-and-default-impedances">Mandatory and default impedances</a></li>
+<li><a href="#child-components">Child components</a></li>
 </ul></li>
+<li><a href="#total-chamber">Total Chamber</a></li>
+<li><a href="#drag-drop-format-advanced">Drag &amp; drop format (advanced)</a></li>
 <li><a href="#chamber-info-tab">Chamber Info Tab</a></li>
 <li><a href="#notes">Notes</a></li>
 </ul></li>
@@ -129,26 +133,88 @@
 <li><strong>[Remove chamber]</strong> (in the tree): removes the selected chamber and renumbers the remaining ones.</li>
 </ul>
 <h3 id="chamber-tree-structure">Chamber tree structure</h3>
-<p>Each chamber shows a subtree of impedances:</p>
+<p>Each chamber shows a subtree of impedances organized by category:</p>
+<pre><code>★ Total: Total (sum of all chambers)    ← Gold background, bold
+├── ZLong ✓                              ← Mandatory
+├── ZTrans ✓                             ← Mandatory
+├── ZDipX ☑                              ← Default (checked)
+├── ZDipY ☑
+├── ZQuadX ☑
+├── ZQuadY ☑
+├── ZLongTotal ☑
+├── ZTransTotal ☐                        ← Not default
+├── ...
+└── ZTransISC ☐
+
+Chamber 1: MyComponent                   ← Normal appearance
+├── [Remove chamber]
+├── ZLong ✓
+├── ZTrans ✓
+└── ...</code></pre>
+<h3 id="impedance-categories-and-order">Impedance categories and order</h3>
+<p>Impedances are displayed in the following order:</p>
+<ol type="1">
+<li><strong>Base Impedances</strong> (wall contribution)
 <ul>
-<li>Parent impedance (e.g. <code>ZLong</code>, <code>ZTrans</code>, <code>ZDip</code>, …)</li>
-<li>Child components:
+<li><code>ZLong</code> (mandatory)</li>
+<li><code>ZTrans</code> (mandatory)</li>
+<li><code>ZDipX</code>, <code>ZDipY</code></li>
+<li><code>ZQuadX</code>, <code>ZQuadY</code></li>
+</ul></li>
+<li><strong>Total Impedances</strong> (wall + space charge)
 <ul>
-<li><code>...Re</code> (real part)</li>
-<li><code>...Im</code> (imaginary part)</li>
+<li><code>ZLongTotal</code>, <code>ZTransTotal</code></li>
+<li><code>ZDipXTotal</code>, <code>ZDipYTotal</code></li>
+<li><code>ZQuadXTotal</code>, <code>ZQuadYTotal</code></li>
+</ul></li>
+<li><strong>Surface Impedances</strong>
+<ul>
+<li><code>ZLongSurf</code>, <code>ZTransSurf</code></li>
+</ul></li>
+<li><strong>Space Charge</strong> (DSC/ISC)
+<ul>
+<li><code>ZLongDSC</code>, <code>ZLongISC</code></li>
+<li><code>ZTransDSC</code>, <code>ZTransISC</code></li>
+</ul></li>
+</ol>
+<h3 id="mandatory-and-default-impedances">Mandatory and default impedances</h3>
+<p><strong>Mandatory</strong> (always enabled, cannot be deselected): - <code>ZLong</code> - <code>ZTrans</code></p>
+<p><strong>Default</strong> (checked by default on new chambers): - <code>ZLong</code>, <code>ZTrans</code> (mandatory) - <code>ZLongTotal</code> - <code>ZDipX</code>, <code>ZDipY</code>, <code>ZQuadX</code>, <code>ZQuadY</code></p>
+<h3 id="child-components">Child components</h3>
+<p>Each impedance has child components for drag &amp; drop: - <code>...Re</code> (real part) - <code>...Im</code> (imaginary part)</p>
+<hr />
+<h2 id="total-chamber">Total Chamber</h2>
+<p>When you load an accelerator and run <strong>Calculate All</strong>, a special <strong>Total</strong> chamber is created:</p>
+<ul>
+<li><strong>Visual distinction:</strong>
+<ul>
+<li>★ star prefix in the name</li>
+<li>Gold/lemon background color</li>
+<li>Bold font</li>
+</ul></li>
+<li><strong>Contents:</strong>
+<ul>
+<li>Sum of impedances from all individual chambers</li>
+<li>Same impedance selection as other chambers</li>
+</ul></li>
+<li><strong>Behavior:</strong>
+<ul>
+<li>Cannot be manually removed</li>
+<li>Automatically recreated on each <strong>Calculate All</strong></li>
+<li>Supports drag &amp; drop to Data/Plot panels</li>
 </ul></li>
 </ul>
-<h4 id="mandatory-impedances">Mandatory impedances</h4>
-<p><code>ZLong</code> and <code>ZTrans</code> are mandatory and always enabled.</p>
-<h3 id="drag-drop-format-advanced">Drag &amp; drop format (advanced)</h3>
+<hr />
+<h2 id="drag-drop-format-advanced">Drag &amp; drop format (advanced)</h2>
 <p>Dragging from the tree provides MIME data in the form:</p>
 <pre><code>chamber_name|impedance_name</code></pre>
 <p>Examples:</p>
 <ul>
-<li><code>Chamber 1|ZLongRe</code></li>
-<li><code>Chamber 1|ZLong</code> (means “base impedance”, used to add both components)</li>
+<li><code>Chamber 1|ZLongRe</code> — specific component</li>
+<li><code>Chamber 1|ZLong</code> — base impedance (adds both Re and Im)</li>
+<li><code>Total|ZLong</code> — from Total chamber</li>
 </ul>
-<p>This is used by the Data and Plot panels.</p>
+<p>The chamber name is extracted from the tree item text, handling special cases like the ★ prefix.</p>
 <hr />
 <h2 id="chamber-info-tab">Chamber Info Tab</h2>
 <p>This tab edits the same information stored in a <code>.cfg</code> file, organized in collapsible sections:</p>
@@ -183,6 +249,7 @@
 <ul>
 <li>The chamber selector (combo box) on top selects the active chamber.</li>
 <li>When you calculate impedances, the tree labels can display sample counts (e.g. <code>ZLong (N)</code>).</li>
+<li>Checkbox states in the sidebar are synchronized with the <strong>Accelerator → Impedance Selection</strong> menu.</li>
 </ul>
 
     </main>

@@ -6,8 +6,8 @@
 
 ## Authors
 
-- **Tatiana Rijoff** – tatiana.rijoff@gmail.com  
-- **Carlo Zannini** – carlo.zannini@cern.ch  
+- **Tatiana Rijoff** — tatiana.rijoff@gmail.com  
+- **Carlo Zannini** — carlo.zannini@cern.ch  
 
 *Copyright: CERN*
 
@@ -33,13 +33,14 @@
 
 - [Overview](#overview)
 - [Input Files](#input-files)
-- [Example 1: Running MultipleChamber](#example-1-running-multiplechamber)
-- [Example 2: Directory Structure of the Output](#example-2-directory-structure-of-the-output)
-- [Example 3: Per-Chamber Impedance Files](#example-3-per-chamber-impedance-files)
-- [Example 4: Automatic Impedance Plots](#example-4-automatic-impedance-plots)
-- [Example 5: Total Impedance Summation](#example-5-total-impedance-summation)
-- [Example 6: Case-Insensitive Mapping](#example-6-case-insensitive-mapping)
-- [Example 7: Common Frequency Grid](#example-7-common-frequency-grid)
+- [Example 1: Basic MultipleChamber Workflow](#example-1-basic-multiplechamber-workflow)
+- [Example 2: Complete Example Script](#example-2-complete-example-script)
+- [Example 3: Directory Structure of the Output](#example-3-directory-structure-of-the-output)
+- [Example 4: Per-Chamber Impedance Files](#example-4-per-chamber-impedance-files)
+- [Example 5: Plotting Individual Elements](#example-5-plotting-individual-elements)
+- [Example 6: Total Impedance Summation](#example-6-total-impedance-summation)
+- [Example 7: Case-Insensitive Mapping](#example-7-case-insensitive-mapping)
+- [Example 8: Common Frequency Grid](#example-8-common-frequency-grid)
 - [Notes and Best Practices](#notes-and-best-practices)
 
 ---
@@ -122,19 +123,27 @@ Names are matched **case-insensitively**, both as dictionary keys and as filenam
 
 ---
 
-## Example 1: Running MultipleChamber
+## Example 1: Basic MultipleChamber Workflow
 
 ```python
 from pytlwall import MultipleChamber
 
+# Create MultipleChamber instance
 mc = MultipleChamber(
     apertype_file="apertype2.txt",
     geom_file="b_L_betax_betay.txt",
-    input_dir="./examples/ex_multiple/",
-    out_dir="output"
+    input_dir="./input/",
+    out_dir="./output/"
 )
 
-mc.run()
+# Step 1: Load input files (lightweight operation)
+mc.load()
+
+# Step 2: Calculate impedances for all lattice elements
+mc.calculate_all()
+
+# Step 3: Plot total accumulated impedances
+mc.plot_totals(show=False)
 ```
 
 Key features:
@@ -147,7 +156,68 @@ Key features:
 
 ---
 
-## Example 2: Directory Structure of the Output
+## Example 2: Complete Example Script
+
+```python
+#!/usr/bin/env python3
+"""Multiple chamber impedance calculation example."""
+
+from pathlib import Path
+from pytlwall import MultipleChamber
+
+def main():
+    """Run the multiple chamber example workflow."""
+    input_dir = Path("./examples/ex_multiple")
+    output_dir = Path("./output_multiple")
+    
+    print("=" * 60)
+    print("Multiple Chamber Impedance Calculation Example")
+    print("=" * 60)
+    print(f"Input directory:  {input_dir}")
+    print(f"Output directory: {output_dir}")
+    
+    # Check required files exist
+    if not input_dir.is_dir():
+        raise SystemExit(f"Error: input directory not found: {input_dir}")
+    
+    required = ["apertype2.txt", "b_L_betax_betay.txt"]
+    missing = [name for name in required if not (input_dir / name).exists()]
+    if missing:
+        raise SystemExit(f"Error: missing required files: {missing}")
+    
+    # Create output directory
+    output_dir.mkdir(parents=True, exist_ok=True)
+    
+    # Initialize MultipleChamber
+    mc = MultipleChamber(
+        apertype_file="apertype2.txt",
+        geom_file="b_L_betax_betay.txt",
+        input_dir=input_dir,
+        out_dir=output_dir,
+    )
+    
+    # Load inputs (lightweight)
+    mc.load()
+    
+    # Perform the full calculation for all lattice elements
+    mc.calculate_all()
+    
+    # Plot total accumulated impedances (saved under out_dir/total)
+    mc.plot_totals(show=False)
+    
+    # Optional: plot individual elements
+    if mc.n_elements > 0:
+        mc.plot_element(0, show=False)
+    
+    print(f"\nDone. Results written to: {output_dir}")
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+## Example 3: Directory Structure of the Output
 
 After running the example:
 
@@ -182,7 +252,7 @@ Notes:
 
 ---
 
-## Example 3: Per-Chamber Impedance Files
+## Example 4: Per-Chamber Impedance Files
 
 Each file `impedance.xlsx` contains:
 
@@ -199,41 +269,39 @@ All impedances are exported using `io_util.export_impedance`.
 
 ---
 
-## Example 4: Automatic Impedance Plots
+## Example 5: Plotting Individual Elements
 
-Plots are generated using:
-
-```
-plot_util.plot_Z_vs_f_simple()
-```
-
-Only impedances that are **not identically zero or NaN** are plotted.
-
-Example internal call:
+To plot the impedance of a specific lattice element:
 
 ```python
-plot_util.plot_Z_vs_f_simple(
-    f=freqs,
-    Z=Z,
-    imped_type="L",
-    title="Chamber 001 – ZLong",
-    savedir="output/chamber001",
-    savename="ZLong.png",
-    xscale="log",
-    yscale="log",
+from pytlwall import MultipleChamber
+
+mc = MultipleChamber(
+    apertype_file="apertype2.txt",
+    geom_file="b_L_betax_betay.txt",
+    input_dir="./input/",
+    out_dir="./output/"
 )
+
+mc.load()
+mc.calculate_all()
+
+# Plot element 0 (first element)
+mc.plot_element(0, show=False)
+
+# Plot element 5
+mc.plot_element(5, show=False)
+
+# Plot multiple elements
+for i in range(min(5, mc.n_elements)):
+    mc.plot_element(i, show=False)
 ```
 
-Plots are saved inside each chamber directory with filenames like:
-
-- `ZLong.png`
-- `ZTrans.png`
-- `ZDipX.png`
-- …
+The `show=False` parameter saves plots to disk without displaying them interactively.
 
 ---
 
-## Example 5: Total Impedance Summation
+## Example 6: Total Impedance Summation
 
 After processing all chambers:
 
@@ -247,7 +315,7 @@ Results are saved to:
 output/total/total_impedance.xlsx
 ```
 
-Plots generated:
+Plots generated by `mc.plot_totals()`:
 
 - `ZLong_tot.png`
 - `ZTrans_tot.png`
@@ -257,7 +325,7 @@ Plots generated:
 
 ---
 
-## Example 6: Case-Insensitive Mapping
+## Example 7: Case-Insensitive Mapping
 
 Mapping used:
 
@@ -281,7 +349,7 @@ This ensures robustness in large-scale workflows.
 
 ---
 
-## Example 7: Common Frequency Grid
+## Example 8: Common Frequency Grid
 
 To guarantee element-by-element impedance summation:
 
@@ -297,6 +365,31 @@ This ensures:
 
 ---
 
+## API Reference
+
+### MultipleChamber Methods
+
+| Method | Description |
+|--------|-------------|
+| `__init__(apertype_file, geom_file, input_dir, out_dir)` | Initialize with input file paths |
+| `load()` | Load aperture types, geometry, and configuration files |
+| `calculate_all()` | Calculate impedances for all lattice elements |
+| `plot_totals(show=False)` | Plot total accumulated impedances |
+| `plot_element(index, show=False)` | Plot impedance for a specific element |
+| `n_elements` | Property: number of lattice elements |
+
+### Workflow
+
+```
+1. __init__()     →  Set up file paths
+2. load()         →  Read input files, validate data
+3. calculate_all() →  Compute impedances for all elements
+4. plot_totals()  →  Generate total impedance plots
+5. plot_element() →  (Optional) Plot individual elements
+```
+
+---
+
 ## Notes and Best Practices
 
 - `apertype2.txt` and `b_L_betax_betay.txt` must have the **same number of lines**
@@ -304,6 +397,8 @@ This ensures:
 - `.cfg` files may define different frequencies, but only the first is used
 - Use the `total/` directory for cross-checks and global validation
 - Ensure `input_dir` contains all `.cfg` files required by the mapping
+- Always call `load()` before `calculate_all()`
+- Use `show=False` for batch processing to avoid interactive plot windows
 
 ---
 

@@ -19,7 +19,7 @@ It can be used:
 
 | Component | Minimum | Recommended |
 | --------- | ------- | ----------- |
-| Python    | 3.9     | 3.11–3.12   |
+| Python    | 3.8     | 3.11–3.12   |
 
 ### Core dependencies (always required)
 
@@ -82,11 +82,7 @@ If the required Qt libraries are not installed, PyTlWall will still work perfect
 pip install pyqt5
 ```
 
-Alternatively, you may use PySide6:
-
-```bash
-pip install pyside6
-```
+> **Note:** The GUI is developed and tested with PyQt5. PySide6 is not currently supported.
 
 ### Optional pip extras (advanced users)
 
@@ -106,6 +102,11 @@ You can start the GUI in any of the following ways:
 ```bash
 # Recommended (module entry point)
 python -m pytlwall_gui
+```
+
+```bash
+# Via main pytlwall module
+python -m pytlwall --gui
 ```
 
 ```bash
@@ -205,8 +206,8 @@ pip uninstall pytlwall
 
 ## Authors
 
-* Tatiana Rijoff
-* Carlo Zannini (CERN)
+* Tatiana Rijoff (tatiana.rijoff@gmail.com)
+* Carlo Zannini (carlo.zannini@cern.ch)
 
 ---
 

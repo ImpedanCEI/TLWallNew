@@ -95,9 +95,15 @@
 <ul>
 <li><a href="#file-menu">File menu</a></li>
 <li><a href="#chamber-menu">Chamber menu</a></li>
+<li><a href="#accelerator-menu">Accelerator menu</a>
+<ul>
+<li><a href="#accelerator-workflow">Accelerator Workflow</a></li>
+<li><a href="#notes">Notes</a></li>
+</ul></li>
 <li><a href="#help-menu">Help menu</a>
 <ul>
 <li><a href="#documentation">Documentation</a></li>
+<li><a href="#about">About</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -118,6 +124,7 @@
 <ul>
 <li><strong>File</strong></li>
 <li><strong>Chamber</strong></li>
+<li><strong>Accelerator</strong></li>
 <li><strong>Help</strong></li>
 </ul>
 <hr />
@@ -150,24 +157,113 @@ Restore a workspace previously saved as a View.</p></li>
 <h2 id="chamber-menu">Chamber menu</h2>
 <ul>
 <li><p><strong>New Chamber</strong><br />
-Add a new default chamber.</p></li>
+Add a new chamber with default values.</p></li>
 <li><p><strong>New Chamber with config…</strong><br />
 Create a chamber from an existing <code>.cfg</code> file.</p></li>
+<li><p><strong>Duplicate Chamber</strong><br />
+Create a copy of the currently selected chamber.</p></li>
 <li><p><strong>Select All</strong> / <strong>Deselect All</strong><br />
 Enable/disable impedance outputs for the current chamber (mandatory ones remain enabled).</p></li>
 <li><p><strong>Calculate</strong><br />
 Run impedance computation for the selected chamber and selected outputs.</p></li>
 </ul>
 <hr />
+<h2 id="accelerator-menu">Accelerator menu</h2>
+<p>The Accelerator menu provides tools for working with multi-chamber lattice calculations.</p>
+<ul>
+<li><p><strong>Load Accelerator…</strong><br />
+Load an accelerator lattice from a directory containing:</p>
+<ul>
+<li><code>apertype2.txt</code> — aperture types (one per line)</li>
+<li><code>b_L_betax_betay.txt</code> — geometry and optics parameters</li>
+<li>Chamber configuration files (<code>*.cfg</code>) for each aperture type</li>
+</ul></li>
+<li><p><strong>Impedance Selection</strong> (submenu)<br />
+Configure which impedances to compute for <strong>all chambers</strong> at once.</p>
+<ul>
+<li><p><strong>Select All (All Chambers)</strong><br />
+Enable all impedance outputs for every chamber.</p></li>
+<li><p><strong>Deselect All (All Chambers)</strong><br />
+Disable non-mandatory impedances for every chamber.</p></li>
+<li><p><strong>Base Impedances</strong> (submenu)<br />
+Toggle base wall impedances:</p>
+<ul>
+<li><code>ZLong</code> ✓ (mandatory — always enabled)</li>
+<li><code>ZTrans</code> ✓ (mandatory — always enabled)</li>
+<li><code>ZDipX</code> ☑ (default)</li>
+<li><code>ZDipY</code> ☑ (default)</li>
+<li><code>ZQuadX</code> ☑ (default)</li>
+<li><code>ZQuadY</code> ☑ (default)</li>
+</ul></li>
+<li><p><strong>Total Impedances (wall + SC)</strong> (submenu)<br />
+Toggle total impedances (wall + space charge):</p>
+<ul>
+<li><code>ZLongTotal</code> ☑ (default)</li>
+<li><code>ZTransTotal</code></li>
+<li><code>ZDipXTotal</code></li>
+<li><code>ZDipYTotal</code></li>
+<li><code>ZQuadXTotal</code></li>
+<li><code>ZQuadYTotal</code></li>
+</ul></li>
+<li><p><strong>Surface Impedances</strong> (submenu)<br />
+Toggle surface impedances:</p>
+<ul>
+<li><code>ZLongSurf</code></li>
+<li><code>ZTransSurf</code></li>
+</ul></li>
+<li><p><strong>Space Charge (DSC/ISC)</strong> (submenu)<br />
+Toggle space charge impedances:</p>
+<ul>
+<li><code>ZLongDSC</code></li>
+<li><code>ZLongISC</code></li>
+<li><code>ZTransDSC</code></li>
+<li><code>ZTransISC</code></li>
+</ul></li>
+</ul></li>
+<li><p><strong>Calculate All</strong><br />
+Compute impedances for all loaded chambers and create a <strong>Total</strong> chamber with summed impedances.</p></li>
+</ul>
+<h3 id="accelerator-workflow">Accelerator Workflow</h3>
+<ol type="1">
+<li><strong>Load Accelerator…</strong> → Select directory with input files</li>
+<li>Chambers appear in the sidebar</li>
+<li>Optionally adjust <strong>Impedance Selection</strong> for all chambers</li>
+<li><strong>Calculate All</strong> → Computes all chambers and creates Total</li>
+<li>The <strong>Total</strong> chamber (★) appears at the top of the chamber list</li>
+<li>Drag impedances to Data/Plot panels for analysis</li>
+</ol>
+<h3 id="notes">Notes</h3>
+<ul>
+<li>Mandatory impedances (<code>ZLong</code>, <code>ZTrans</code>) are shown with ✓ and cannot be unchecked</li>
+<li>Default impedances are marked with ☑ and are checked on startup</li>
+<li>Menu checkboxes stay synchronized with the sidebar tree checkboxes</li>
+<li>The Total chamber is automatically recreated each time you run Calculate All</li>
+</ul>
+<hr />
 <h2 id="help-menu">Help menu</h2>
 <h3 id="documentation">Documentation</h3>
 <p>The Help menu opens the generated HTML documentation from <code>doc/html/</code>.</p>
+<p>Submenus include:</p>
+<ul>
+<li><strong>Index</strong> — Main documentation index</li>
+<li><strong>Pytlwall Graphical Interface</strong> — GUI documentation pages</li>
+<li><strong>API Reference</strong> — Module-by-module API docs</li>
+<li><strong>Examples</strong> — Usage examples</li>
+</ul>
 <p>Expected workflow:</p>
 <ol type="1">
 <li>Write/update Markdown sources</li>
 <li>Run <code>build_doc</code></li>
 <li>Open pages from <strong>Help → Documentation</strong></li>
 </ol>
+<h3 id="about">About</h3>
+<p>Shows version and author information:</p>
+<ul>
+<li>Version number</li>
+<li>Authors: Tatiana Rijoff, Carlo Zannini</li>
+<li>Credits for original MATLAB implementation and Python development</li>
+</ul>
+<hr />
 <p>See also: <a href="GUI.html">GUI Documentation</a></p>
 
     </main>

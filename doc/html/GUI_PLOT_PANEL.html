@@ -99,9 +99,16 @@
 <ul>
 <li><a href="#visibility">Visibility</a></li>
 <li><a href="#editable-labels">Editable labels</a></li>
+<li><a href="#remove-items">Remove items</a></li>
 </ul></li>
-<li><a href="#plot-settings">Plot settings</a></li>
+<li><a href="#plot-settings">Plot settings</a>
+<ul>
+<li><a href="#log-scale-behavior">Log scale behavior</a></li>
+<li><a href="#automatic-fallback-example">Automatic fallback example</a></li>
+</ul></li>
+<li><a href="#color-rotation">Color rotation</a></li>
 <li><a href="#export">Export</a></li>
+<li><a href="#tips">Tips</a></li>
 </ul></li>
 </ul>
             </div>
@@ -124,7 +131,7 @@
 <li>Accepts <strong>drag &amp; drop</strong> of impedances from the chambers tree.</li>
 <li>Overlays multiple curves on the same axes.</li>
 <li>Provides a list to toggle visibility and edit curve labels.</li>
-<li>Offers basic plot settings (axis labels and scales).</li>
+<li>Offers plot settings (title, axis labels, and scales).</li>
 <li>Exports the plot to image.</li>
 </ul>
 <hr />
@@ -132,11 +139,11 @@
 <p>Drop an impedance component (e.g. <code>ZLongRe</code>) or a base impedance (e.g. <code>ZLong</code>).</p>
 <p>Each dropped item becomes a <strong>PlotItem</strong> with:</p>
 <ul>
-<li>chamber name</li>
+<li>chamber name (including “Total” if from the Total chamber)</li>
 <li>impedance base name</li>
-<li>component (Re / Im / Abs)</li>
+<li>component (Re / Im)</li>
 <li>data array and frequencies</li>
-<li>assigned color</li>
+<li>assigned color (automatically rotated)</li>
 <li>editable label</li>
 </ul>
 <hr />
@@ -145,22 +152,63 @@
 <p>Each plotted item can be shown/hidden through its checkbox in the list.</p>
 <h3 id="editable-labels">Editable labels</h3>
 <p>Each list entry is editable: you can override the legend label without changing the underlying data.</p>
+<h3 id="remove-items">Remove items</h3>
+<p>Right-click on an item to access context menu options, including removal.</p>
 <hr />
 <h2 id="plot-settings">Plot settings</h2>
 <p>Common settings include:</p>
 <ul>
-<li>plot title</li>
-<li>X/Y labels</li>
-<li>X/Y scale (log or linear)</li>
+<li><strong>Title</strong>: Editable plot title</li>
+<li><strong>X label</strong>: Default “Frequency [Hz]”</li>
+<li><strong>Y label</strong>: Default “Z [Ω]”</li>
+<li><strong>X scale</strong>: log or linear</li>
+<li><strong>Y scale</strong>: log or linear (plus symlog, logit, asinh options)</li>
 </ul>
-<p><strong>Note:</strong> for log scale plotting, the panel uses absolute values and masks invalid points.</p>
+<h3 id="log-scale-behavior">Log scale behavior</h3>
+<p>When using <strong>log scale</strong>:</p>
+<ul>
+<li>The plot uses <strong>absolute values</strong> of the data</li>
+<li>Non-positive values are automatically masked (shown as gaps)</li>
+<li>If <strong>all data points</strong> are non-positive, the scale <strong>automatically falls back to linear</strong></li>
+</ul>
+<p>This prevents crashes when plotting impedances that have negative values (common for imaginary parts).</p>
+<h3 id="automatic-fallback-example">Automatic fallback example</h3>
+<pre><code>User selects: Y scale = log
+Data contains: ZLongIm with negative values
+Result: Plot uses |ZLongIm| for display
+        If all values are ≤ 0, switches to linear scale
+        Warning printed to console</code></pre>
+<hr />
+<h2 id="color-rotation">Color rotation</h2>
+<p>Each new curve receives a color from the palette:</p>
+<ol type="1">
+<li>Blue (#1f77b4)</li>
+<li>Orange (#ff7f0e)</li>
+<li>Green (#2ca02c)</li>
+<li>Red (#d62728)</li>
+<li>Purple (#9467bd)</li>
+<li>Brown (#8c564b)</li>
+<li>Pink (#e377c2)</li>
+<li>Gray (#7f7f7f)</li>
+<li>Yellow-green (#bcbd22)</li>
+<li>Cyan (#17becf)</li>
+</ol>
+<p>Colors cycle when more than 10 curves are plotted.</p>
 <hr />
 <h2 id="export">Export</h2>
 <p>From the <strong>File</strong> menu:</p>
 <ul>
-<li><strong>Save Plot…</strong> exports the current plot as an image file.</li>
+<li><strong>Save Plot…</strong> exports the current plot as an image file (PNG, PDF, SVG, etc.)</li>
 </ul>
 <p>Plots are also exported when saving a complete <strong>View</strong>.</p>
+<hr />
+<h2 id="tips">Tips</h2>
+<ul>
+<li><strong>Comparing chambers</strong>: Drag the same impedance from multiple chambers to compare them</li>
+<li><strong>Total vs individual</strong>: Drag from “★ Total” to see the sum alongside individual contributions</li>
+<li><strong>Log scale issues</strong>: If a plot appears empty, try switching to linear scale — the data may have non-positive values</li>
+<li><strong>Legend positioning</strong>: The legend automatically positions itself to minimize overlap</li>
+</ul>
 
     </main>
 </div>

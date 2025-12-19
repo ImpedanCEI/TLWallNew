@@ -240,34 +240,46 @@ freqs = pytlwall.Frequencies(fmin=3, fmax=9, fstep=2)
 
 | Document | Description |
 |----------|-------------|
-| [API_REFERENCE.md](API_REFERENCE.md) | Main API overview |
-| [API_REFERENCE_BEAM.md](API_REFERENCE_BEAM.md) | Beam module |
-| [API_REFERENCE_FREQUENCIES.md](API_REFERENCE_FREQUENCIES.md) | Frequencies module |
-| [API_REFERENCE_LAYER.md](API_REFERENCE_LAYER.md) | Layer module |
-| [API_REFERENCE_CHAMBER.md](API_REFERENCE_CHAMBER.md) | Chamber module |
-| [API_REFERENCE_TLWALL.md](API_REFERENCE_TLWALL.md) | TlWall module |
-| [API_REFERENCE_CFGIO.md](API_REFERENCE_CFGIO.md) | CfgIo module |
-| [API_REFERENCE_MULTIPLE.md](API_REFERENCE_MULTIPLE.md) | MultipleChamber module |
+| [API_REFERENCE.md](doc/API_REFERENCE.md) | Main API overview |
+| [API_REFERENCE_BEAM.md](doc/API_REFERENCE_BEAM.md) | Beam module |
+| [API_REFERENCE_FREQUENCIES.md](doc/API_REFERENCE_FREQUENCIES.md) | Frequencies module |
+| [API_REFERENCE_LAYER.md](doc/API_REFERENCE_LAYER.md) | Layer module |
+| [API_REFERENCE_CHAMBER.md](doc/API_REFERENCE_CHAMBER.md) | Chamber module |
+| [API_REFERENCE_TLWALL.md](doc/API_REFERENCE_TLWALL.md) | TlWall module |
+| [API_REFERENCE_CFGIO.md](doc/API_REFERENCE_CFGIO.md) | CfgIo module |
+| [API_REFERENCE_MULTIPLE.md](doc/API_REFERENCE_MULTIPLE.md) | MultipleChamber module |
+
+### GUI Documentation
+
+| Document | Description |
+|----------|-------------|
+| [GUI.md](doc/GUI.md) | GUI overview and getting started |
+| [GUI_MENU_BAR.md](doc/GUI_MENU_BAR.md) | Menu bar reference |
+| [GUI_SIDEBAR.md](doc/GUI_SIDEBAR.md) | Sidebar controls |
+| [GUI_DATA_PANEL.md](doc/GUI_DATA_PANEL.md) | Data panel usage |
+| [GUI_PLOT_PANEL.md](doc/GUI_PLOT_PANEL.md) | Plot panel features |
+| [GUI_VIEW_IO.md](doc/GUI_VIEW_IO.md) | View and I/O operations |
 
 ### Examples
 
 | Document | Description |
 |----------|-------------|
-| [EXAMPLES_README.md](EXAMPLES_README.md) | Examples overview |
-| [EXAMPLES_BEAM.md](EXAMPLES_BEAM.md) | Beam examples |
-| [EXAMPLES_FREQUENCIES.md](EXAMPLES_FREQUENCIES.md) | Frequencies examples |
-| [EXAMPLES_LAYER.md](EXAMPLES_LAYER.md) | Layer examples |
-| [EXAMPLES_CHAMBER.md](EXAMPLES_CHAMBER.md) | Chamber examples |
-| [EXAMPLES_TLWALL.md](EXAMPLES_TLWALL.md) | TlWall examples |
-| [EXAMPLES_MULTIPLE.md](EXAMPLES_MULTIPLE.md) | MultipleChamber examples |
-| [EXAMPLES_LOGGING.md](EXAMPLES_LOGGING.md) | Logging examples |
+| [EXAMPLES_README.md](doc/EXAMPLES_README.md) | Examples overview |
+| [EXAMPLES_BEAM.md](doc/EXAMPLES_BEAM.md) | Beam examples |
+| [EXAMPLES_FREQUENCIES.md](doc/EXAMPLES_FREQUENCIES.md) | Frequencies examples |
+| [EXAMPLES_LAYER.md](doc/EXAMPLES_LAYER.md) | Layer examples |
+| [EXAMPLES_CHAMBER.md](doc/EXAMPLES_CHAMBER.md) | Chamber examples |
+| [EXAMPLES_TLWALL.md](doc/EXAMPLES_TLWALL.md) | TlWall examples |
+| [EXAMPLES_MULTIPLE.md](doc/EXAMPLES_MULTIPLE.md) | MultipleChamber examples |
+| [EXAMPLES_LOGGING.md](doc/EXAMPLES_LOGGING.md) | Logging examples |
 
 ### Additional Documentation
 
 | Document | Description |
 |----------|-------------|
-| [INSTALLATION.md](INSTALLATION.md) | Detailed installation guide |
-| [CHAMBER_SHAPES_REFERENCE.md](CHAMBER_SHAPES_REFERENCE.md) | Chamber shape details |
+| [INSTALLATION.md](doc/INSTALLATION.md) | Detailed installation guide |
+| [CHAMBER_SHAPES_REFERENCE.md](doc/CHAMBER_SHAPES_REFERENCE.md) | Chamber shape details |
+| [PYTLWALL_THEORY.md](doc/PYTLWALL_THEORY.md) | Theoretical background |
 
 ---
 
@@ -326,8 +338,8 @@ test_beam_shift = 0.001
 
 ### Getting Help
 
-1. Check the [API Reference](API_REFERENCE.md)
-2. Review the [Examples](EXAMPLES_README.md)
+1. Check the [API Reference](doc/API_REFERENCE.md)
+2. Review the [Examples](doc/EXAMPLES_README.md)
 3. Contact the authors
 
 ---

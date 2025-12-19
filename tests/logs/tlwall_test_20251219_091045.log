@@ -1,0 +1,377 @@
+2025-12-19 09:10:45 [INFO] ================================================================================
+2025-12-19 09:10:45 [INFO] START TEST SESSION
+2025-12-19 09:10:45 [INFO] ================================================================================
+2025-12-19 09:10:45 [INFO] Timestamp: 2025-12-19 09:10:45
+2025-12-19 09:10:45 [INFO] Log file: tests/logs/tlwall_test_20251219_091045.log
+2025-12-19 09:10:45 [INFO] Test directory: /home/tatij/CERN/pytlwall/pytlwall-master/tests
+2025-12-19 09:10:45 [INFO] Pattern: test*.py
+2025-12-19 09:10:45 [INFO] Verbosity: 2
+2025-12-19 09:10:45 [INFO] Mode: Discover all tests
+2025-12-19 09:10:45 [INFO] 
+2025-12-19 09:10:45 [INFO]  =============================================
+2025-12-19 09:10:45 [INFO]  =============   testing test_beam =================
+2025-12-19 09:10:45 [INFO]  =============================================
+2025-12-19 09:10:45 [INFO] Test that proton mass constants are exported. ... ok
+2025-12-19 09:10:45 [INFO] Test beta = 1 (speed of light). ... ok
+2025-12-19 09:10:45 [INFO] Test gamma = 1 (particle at rest). ... ok
+2025-12-19 09:10:45 [INFO] Test very large gamma (extreme relativistic). ... ok
+2025-12-19 09:10:45 [INFO] Test that gammarel takes priority when both provided. ... ok
+2025-12-19 09:10:45 [INFO] Test custom particle mass. ... ok
+2025-12-19 09:10:45 [INFO] Test custom test_beam_shift. ... ok
+2025-12-19 09:10:45 [INFO] Test default initialization (ultra-relativistic). ... ok
+2025-12-19 09:10:45 [INFO] Test that gamma and gammarel produce identical results. ... ok
+2025-12-19 09:10:45 [INFO] Test initialization with kinetic energy. ... ok
+2025-12-19 09:10:45 [INFO] Test initialization with beta. ... ok
+2025-12-19 09:10:45 [INFO] Test initialization with gamma parameter (alias for gammarel). ... ok
+2025-12-19 09:10:45 [INFO] Test initialization with gammarel parameter. ... ok
+2025-12-19 09:10:45 [INFO] Test initialization with momentum. ... ok
+2025-12-19 09:10:45 [INFO] Test that invalid mass raises error. ... ok
+2025-12-19 09:10:45 [INFO] Test that Ekin_MeV has priority over gamma. ... ok
+2025-12-19 09:10:45 [INFO] Test that Ekin_MeV has priority over gammarel. ... ok
+2025-12-19 09:10:45 [INFO] Test that betarel has priority over gamma. ... ok
+2025-12-19 09:10:45 [INFO] Test that p_MeV_c has priority over betarel. ... ok
+2025-12-19 09:10:45 [INFO] Test non-relativistic case (beta << 1). ... ok
+2025-12-19 09:10:45 [INFO] Test relativistic energy-momentum relations. ... ok
+2025-12-19 09:10:45 [INFO] Test ultra-relativistic limit (beta -> 1). ... ok
+2025-12-19 09:10:45 [INFO] Test velocity calculation. ... ok
+2025-12-19 09:10:45 [INFO] Test that invalid Ekin is rejected. ... ok
+2025-12-19 09:10:45 [INFO] Test that invalid betarel is rejected. ... ok
+2025-12-19 09:10:45 [INFO] Test that invalid gammarel is rejected. ... ok
+2025-12-19 09:10:45 [INFO] Test that invalid momentum is rejected. ... ok
+2025-12-19 09:10:45 [INFO] Test setting Ekin_MeV property. ... ok
+2025-12-19 09:10:45 [INFO] Test setting betarel property. ... ok
+2025-12-19 09:10:45 [INFO] Test setting gammarel property. ... ok
+2025-12-19 09:10:45 [INFO] Test setting p_MeV_c property. ... ok
+2025-12-19 09:10:45 [INFO] Test __repr__ method. ... ok
+2025-12-19 09:10:45 [INFO] Test __str__ method. ... ok
+2025-12-19 09:10:45 [INFO]  =============================================
+2025-12-19 09:10:45 [INFO]  =============   testing test_cfg =================
+2025-12-19 09:10:45 [INFO]  =============================================
+2025-12-19 09:10:45 [INFO] Test reading beam returns None if section missing. ... ok
+2025-12-19 09:10:45 [INFO] Test reading beam with betarel. ... ok
+2025-12-19 09:10:45 [INFO] Test reading beam with gammarel. ... ok
+2025-12-19 09:10:45 [INFO] Test reading beam with custom mass. ... ok
+2025-12-19 09:10:45 [INFO] Test saving beam configuration. ... ok
+2025-12-19 09:10:45 [INFO] Test reading chamber returns None if section missing. ... ok
+2025-12-19 09:10:45 [INFO] Test reading circular chamber configuration. ... ok
+2025-12-19 09:10:45 [INFO] Test reading elliptical chamber configuration. ... ok
+2025-12-19 09:10:45 [INFO] Test saving and reading chamber configuration. ... ok
+2025-12-19 09:10:45 [INFO] Test reading default frequencies. ... ok
+2025-12-19 09:10:45 [INFO] Test reading frequency range. ... ok
+2025-12-19 09:10:45 [INFO] Test saving frequency configuration. ... ok
+2025-12-19 09:10:45 [INFO] Test reading config and performing calculation (replaces calc_wall). ... ok
+2025-12-19 09:10:45 [INFO] Test reading complete pytlwall configuration. ... ok
+2025-12-19 09:10:45 [INFO] Test writing configuration to file. ... ok
+2025-12-19 09:10:45 [INFO] Test default initialization without file. ... ok
+2025-12-19 09:10:45 [INFO] Test initialization with config file. ... ok
+2025-12-19 09:10:45 [INFO] Test initialization with nonexistent file raises error. ... ok
+2025-12-19 09:10:45 [INFO] Test reading output impedance list. ... ok
+2025-12-19 09:10:45 [INFO] Test saving calculation configuration. ... ok
+2025-12-19 09:10:45 [INFO] Test reading existing config file. ... ok
+2025-12-19 09:10:45 [INFO] Test reading nonexistent file raises error. ... ok
+2025-12-19 09:10:45 [INFO] Test __repr__ method. ... ok
+2025-12-19 09:10:45 [INFO] Test __str__ method. ... ok
+2025-12-19 09:10:45 [INFO]  =============================================
+2025-12-19 09:10:45 [INFO]  =============   testing test_cfgio_realistic =================
+2025-12-19 09:10:45 [INFO]  =============================================
+2025-12-19 09:10:45 [INFO] Test reading [beam_info] from one_layer.cfg. ... ok
+2025-12-19 09:10:45 [INFO] Test reading frequencies from [frequency_file] section. ... ok
+2025-12-19 09:10:45 [INFO] freq_input2.txt is plain data, not cfg - should raise error. ... ok
+2025-12-19 09:10:45 [INFO] freq_input3.dat is plain data, not cfg - should raise error. ... ok
+2025-12-19 09:10:45 [INFO] freq_input.txt is plain data, not cfg - should raise error. ... ok
+2025-12-19 09:10:45 [INFO] Test reading [frequency_info] from one_layer.cfg. ... ok
+2025-12-19 09:10:45 [INFO] Test error handling for missing file. ... ok
+2025-12-19 09:10:45 [INFO] Test handling of missing sections. ... ok
+2025-12-19 09:10:45 [INFO] Test reading [base_info] from one_layer.cfg. ... ok
+2025-12-19 09:10:45 [INFO] Test reading layers from one_layer.cfg. ... ok
+2025-12-19 09:10:45 [INFO] Test calculating impedance from one_layer.cfg (replaces calc_wall). ... ok
+2025-12-19 09:10:45 [INFO] Test building complete TlWall from one_layer.cfg. ... ok
+2025-12-19 09:10:45 [INFO] Test building TlWall from test001.cfg. ... ok
+2025-12-19 09:10:45 [INFO] Test reading RECTANGULAR chamber. ... ok
+2025-12-19 09:10:45 [INFO] Test support for thick_M (uppercase M). ... ok
+2025-12-19 09:10:45 [INFO] Test reading chamber with multiple layers. ... ok
+2025-12-19 09:10:45 [INFO]  =============================================
+2025-12-19 09:10:45 [INFO]  =============   testing test_cfgio_special_cases =================
+2025-12-19 09:10:45 [INFO]  =============================================
+2025-12-19 09:10:45 [INFO] Test complete LHC-style configuration. ... ok
+2025-12-19 09:10:45 [INFO] Test configuration with frequency_file section. ... ok
+2025-12-19 09:10:45 [INFO] Test layer with thick_m = inf. ... ok
+2025-12-19 09:10:45 [INFO] Test reading test_config section. ... ok
+2025-12-19 09:10:45 [INFO]  =============================================
+2025-12-19 09:10:45 [INFO]  =============   testing test_chamber =================
+2025-12-19 09:10:45 [INFO]  =============================================
+2025-12-19 09:10:45 [INFO] Test that invalid beta types raise errors. ... ok
+2025-12-19 09:10:45 [INFO] Test that negative beta_x raises error. ... ok
+2025-12-19 09:10:45 [INFO] Test that negative beta_y raises error. ... ok
+2025-12-19 09:10:45 [INFO] Test setting horizontal beta function. ... ok
+2025-12-19 09:10:45 [INFO] Test setting vertical beta function. ... ok
+2025-12-19 09:10:45 [INFO] Test that zero beta_x raises error. ... ok
+2025-12-19 09:10:45 [INFO] Test that invalid dimension types raise errors. ... ok
+2025-12-19 09:10:45 [INFO] Test that negative horizontal dimension raises error. ... ok
+2025-12-19 09:10:45 [INFO] Test that negative pipe length raises error. ... ok
+2025-12-19 09:10:45 [INFO] Test that negative pipe radius raises error. ... ok
+2025-12-19 09:10:45 [INFO] Test that negative vertical dimension raises error. ... ok
+2025-12-19 09:10:45 [INFO] Test setting horizontal dimension. ... ok
+2025-12-19 09:10:45 [INFO] Test setting pipe length. ... ok
+2025-12-19 09:10:45 [INFO] Test setting pipe radius updates all dimensions. ... ok
+2025-12-19 09:10:45 [INFO] Test setting vertical dimension. ... ok
+2025-12-19 09:10:45 [INFO] Test that zero pipe length raises error. ... ok
+2025-12-19 09:10:45 [INFO] Test elliptical chamber with equal dimensions. ... ok
+2025-12-19 09:10:45 [INFO] Test chamber with extreme aspect ratio. ... ok
+2025-12-19 09:10:45 [INFO] Test chamber with very large dimensions. ... ok
+2025-12-19 09:10:45 [INFO] Test chamber with very small dimensions. ... ok
+2025-12-19 09:10:45 [INFO] Test circular chamber initialization. ... ok
+2025-12-19 09:10:45 [INFO] Test chamber creation with default parameters. ... ok
+2025-12-19 09:10:45 [INFO] Test elliptical chamber initialization. ... ok
+2025-12-19 09:10:45 [INFO] Test rectangular chamber initialization. ... ok
+2025-12-19 09:10:45 [INFO] Test initialization with beta functions. ... ok
+2025-12-19 09:10:45 [INFO] Test initialization with custom component name. ... ok
+2025-12-19 09:10:45 [INFO] Test flat chamber for modern colliders. ... ok
+2025-12-19 09:10:45 [INFO] Test LHC-style circular chamber. ... ok
+2025-12-19 09:10:45 [INFO] Test chamber with no layers. ... ok
+2025-12-19 09:10:45 [INFO] Test chamber with layers list. ... ok
+2025-12-19 09:10:45 [INFO] Test get_dimensions method. ... ok
+2025-12-19 09:10:45 [INFO] Test __repr__ method. ... ok
+2025-12-19 09:10:45 [INFO] Test __str__ method. ... ok
+2025-12-19 09:10:45 [INFO] Test summary method. ... ok
+2025-12-19 09:10:45 [INFO] Test that shape specification is case-insensitive. ... ok
+2025-12-19 09:10:45 [INFO] Test changing chamber shape after initialization. ... ok
+2025-12-19 09:10:45 [INFO] Test circular chamber shape. ... ok
+2025-12-19 09:10:45 [INFO] Test elliptical chamber shape. ... ok
+2025-12-19 09:10:45 [INFO] Test that invalid shape raises error. ... ok
+2025-12-19 09:10:45 [INFO] Test rectangular chamber shape. ... ok
+2025-12-19 09:10:45 [INFO] Test Yokoya q parameter for circular chamber. ... ok
+2025-12-19 09:10:45 [INFO] Test Yokoya q parameter for elliptical chamber. ... ok
+2025-12-19 09:10:45 [INFO] Test getting all Yokoya factors as dictionary. ... ok
+2025-12-19 09:10:45 [INFO] Test Yokoya q parameter for rectangular chamber. ... ok
+2025-12-19 09:10:45 [INFO] Test that driving Yokoya factors are positive. ... ok
+2025-12-19 09:10:45 [INFO]  =============================================
+2025-12-19 09:10:45 [INFO]  =============   testing test_freq =================
+2025-12-19 09:10:45 [INFO]  =============================================
+2025-12-19 09:10:45 [INFO] Test that all frequencies are positive. ... ok
+2025-12-19 09:10:45 [INFO] Test that all frequencies are finite. ... ok
+2025-12-19 09:10:45 [INFO] Test that there are no duplicate frequencies. ... ok
+2025-12-19 09:10:45 [INFO] Test that frequencies are in reasonable range. ... ok
+2025-12-19 09:10:45 [INFO] Test that frequencies are strictly increasing. ... ok
+2025-12-19 09:10:45 [INFO] Test that different steps cover same range. ... ok
+2025-12-19 09:10:45 [INFO] Test that points per decade follows expected pattern. ... ok
+2025-12-19 09:10:45 [INFO] Test with fractional exponents. ... ok
+2025-12-19 09:10:45 [INFO] Test with very large step (dense array). ... ok
+2025-12-19 09:10:45 [INFO] Test with very large frequency range. ... ok
+2025-12-19 09:10:45 [INFO] Test with very small frequency range. ... ok
+2025-12-19 09:10:45 [INFO] Test that empty list falls back to exponent generation. ... ok
+2025-12-19 09:10:45 [INFO] Test using explicit frequency list. ... ok
+2025-12-19 09:10:45 [INFO] Test that providing freq_list ignores exponent parameters. ... ok
+2025-12-19 09:10:45 [INFO] Test with single frequency. ... ok
+2025-12-19 09:10:45 [INFO] Test that unsorted frequency list is automatically sorted. ... ok
+2025-12-19 09:10:45 [INFO] Test frequency generation with custom exponents. ... ok
+2025-12-19 09:10:45 [INFO] Test default frequency generation. ... ok
+2025-12-19 09:10:45 [INFO] Test that frequency array covers expected range. ... ok
+2025-12-19 09:10:45 [INFO] Test that frequencies are logarithmically spaced. ... ok
+2025-12-19 09:10:45 [INFO] Test that larger fstep produces more points. ... ok
+2025-12-19 09:10:45 [INFO] Test typical LHC frequency range. ... ok
+2025-12-19 09:10:45 [INFO] Test specific resonance frequency analysis. ... ok
+2025-12-19 09:10:45 [INFO] Test __len__ method. ... ok
+2025-12-19 09:10:45 [INFO] Test __repr__ method. ... ok
+2025-12-19 09:10:45 [INFO] Test __repr__ for explicit frequency list. ... ok
+2025-12-19 09:10:45 [INFO] Test __str__ method. ... ok
+2025-12-19 09:10:45 [INFO] Test that frequency values maintain precision. ... ok
+2025-12-19 09:10:45 [INFO] Test that updating with same exponents gives same result. ... ok
+2025-12-19 09:10:45 [INFO] Test fmax setter. ... ok
+2025-12-19 09:10:45 [INFO] Test fmin setter. ... ok
+2025-12-19 09:10:45 [INFO] Test that freq property cannot be set directly. ... ok
+2025-12-19 09:10:45 [INFO] Test fstep setter. ... ok
+2025-12-19 09:10:45 [INFO] Test that setter with invalid value triggers warning. ... ok
+2025-12-19 09:10:45 [INFO] Test update_from_exponents method. ... ok
+2025-12-19 09:10:45 [INFO] Test that update maintains array consistency. ... ok
+2025-12-19 09:10:45 [INFO] Test that fmin > fmax triggers warning. ... ok
+2025-12-19 09:10:45 [INFO] Test that invalid fmax type raises error. ... ok
+2025-12-19 09:10:45 [INFO] Test that invalid fmin type raises error. ... ok
+2025-12-19 09:10:45 [INFO] Test that invalid fstep type raises error. ... ok
+2025-12-19 09:10:45 [INFO] Test that negative frequencies raise error. ... ok
+2025-12-19 09:10:45 [INFO] Test that negative fstep triggers warning. ... ok
+2025-12-19 09:10:45 [INFO] Test that zero frequency raises error. ... ok
+2025-12-19 09:10:45 [INFO]  =============================================
+2025-12-19 09:10:45 [INFO]  =============   testing test_io_util =================
+2025-12-19 09:10:45 [INFO]  =============================================
+2025-12-19 09:10:45 [INFO] Test export_impedance alternative interface. ... ok
+2025-12-19 09:10:45 [INFO] Test get_standard_label function. ... ok
+2025-12-19 09:10:45 [INFO] Test list_supported_formats function. ... ok
+2025-12-19 09:10:45 [INFO] Test print_single_impedance convenience function. ... ok
+2025-12-19 09:10:45 [INFO] Test that PANDAS_AVAILABLE flag is set correctly. ... ok
+2025-12-19 09:10:45 [INFO] Test that xlsx falls back to txt when openpyxl is missing. ... ok
+2025-12-19 09:10:45 [INFO] Test loading aperture types. ... ok
+2025-12-19 09:10:45 [INFO] Test loading radius and length data. ... ok
+2025-12-19 09:10:45 [INFO] Test loading geometry with beta functions. ... ok
+2025-12-19 09:10:45 [INFO] Test loading rectangular geometry with beta. ... ok
+2025-12-19 09:10:45 [INFO] Test exporting multiple impedances. ... ok
+2025-12-19 09:10:45 [INFO] Test exporting single impedance to CSV. ... ok
+2025-12-19 09:10:45 [INFO] Test exporting single impedance to DAT. ... ok
+2025-12-19 09:10:45 [INFO] Test exporting single impedance to TXT. ... ok
+2025-12-19 09:10:45 [INFO] Test exporting with standard labels. ... ok
+2025-12-19 09:10:45 [INFO] Test reading frequency from specific column. ... ok
+2025-12-19 09:10:45 [INFO] Test reading CSV frequency file. ... ok
+2025-12-19 09:10:45 [INFO] Test reading frequency file with header rows. ... ok
+2025-12-19 09:10:45 [INFO] Test reading frequency with unit conversion. ... ok
+2025-12-19 09:10:45 [INFO] Test reading simple frequency file. ... ok
+2025-12-19 09:10:46 [INFO] Test reading impedance file with default columns. ... ok
+2025-12-19 09:10:46 [INFO] Test reading impedance file with header. ... ok
+2025-12-19 09:10:46 [INFO] Test reading surface impedance file. ... ok
+2025-12-19 09:10:46 [INFO] Test reading surface impedance with header. ... ok
+2025-12-19 09:10:46 [INFO] Test that missing ZLong/ZTrans components raise ValueError. ... ok
+2025-12-19 09:10:46 [INFO] Test exporting impedance files for longitudinal/transverse and extras. ... ok
+2025-12-19 09:10:46 [INFO] Test that empty freqs raises error. ... ok
+2025-12-19 09:10:46 [INFO] Test that empty imped_dict raises error. ... ok
+2025-12-19 09:10:46 [INFO] Test that length mismatch raises error. ... ok
+2025-12-19 09:10:46 [INFO] Test that unsupported extension raises error. ... ok
+2025-12-19 09:10:46 [INFO]  =============================================
+2025-12-19 09:10:46 [INFO]  =============   testing test_layer =================
+2025-12-19 09:10:46 [INFO]  =============================================
+2025-12-19 09:10:46 [INFO] Test that surface resistance is positive. ... ok
+2025-12-19 09:10:46 [INFO] Test surface resistance shape. ... ok
+2025-12-19 09:10:46 [INFO] Test modified skin depth shape. ... ok
+2025-12-19 09:10:46 [INFO] Test that skin depth has positive real part. ... ok
+2025-12-19 09:10:46 [INFO] Test skin depth shape. ... ok
+2025-12-19 09:10:46 [INFO] Test propagation constant shape. ... ok
+2025-12-19 09:10:46 [INFO] Test absolute permeability shape. ... ok
+2025-12-19 09:10:46 [INFO] Test relative permeability shape. ... ok
+2025-12-19 09:10:46 [INFO] Test that AC conductivity is complex. ... ok
+2025-12-19 09:10:46 [INFO] Test that AC conductivity has correct shape. ... ok
+2025-12-19 09:10:46 [INFO] Test that effective conductivity magnitude is positive. ... ok
+2025-12-19 09:10:46 [INFO] Test that effective conductivity has correct shape. ... ok
+2025-12-19 09:10:46 [INFO] Test with many frequency points. ... ok
+2025-12-19 09:10:46 [INFO] Test with single frequency point. ... ok
+2025-12-19 09:10:46 [INFO] Test with very high conductivity (superconductor-like). ... ok
+2025-12-19 09:10:46 [INFO] Test with very low conductivity (insulator-like). ... ok
+2025-12-19 09:10:46 [INFO] Test empty frequency array. ... ok
+2025-12-19 09:10:46 [INFO] Test frequency array setter. ... ok
+2025-12-19 09:10:46 [INFO] Test that negative frequencies raise error. ... ok
+2025-12-19 09:10:46 [INFO] Test setting frequency array. ... ok
+2025-12-19 09:10:46 [INFO] Test that zero frequency raises error. ... ok
+2025-12-19 09:10:46 [INFO] Test typical conductivity values. ... ok
+2025-12-19 09:10:46 [INFO] Test that negative conductivity raises error. ... ok
+2025-12-19 09:10:46 [INFO] Test valid positive conductivity. ... ok
+2025-12-19 09:10:46 [INFO] Test zero conductivity (insulator). ... ok
+2025-12-19 09:10:46 [INFO] Test that changing frequencies updates calculations. ... ok
+2025-12-19 09:10:46 [INFO] Test that updating one property doesn't break others. ... ok
+2025-12-19 09:10:46 [INFO] Test boundary (vacuum) layer initialization. ... ok
+2025-12-19 09:10:46 [INFO] Test initialization with custom parameters. ... ok
+2025-12-19 09:10:46 [INFO] Test default layer initialization. ... ok
+2025-12-19 09:10:46 [INFO] Test initialization with frequency array. ... ok
+2025-12-19 09:10:46 [INFO] Test absolute permittivity calculation. ... ok
+2025-12-19 09:10:46 [INFO] Test that negative permittivity raises error. ... ok
+2025-12-19 09:10:46 [INFO] Test relative permittivity. ... ok
+2025-12-19 09:10:46 [INFO] Test that zero permittivity raises error. ... ok
+2025-12-19 09:10:46 [INFO] Test __repr__ method. ... ok
+2025-12-19 09:10:46 [INFO] Test __str__ method. ... ok
+2025-12-19 09:10:46 [INFO] Test that negative roughness raises error. ... ok
+2025-12-19 09:10:46 [INFO] Test positive roughness values. ... ok
+2025-12-19 09:10:46 [INFO] Test smooth surface (zero roughness). ... ok
+2025-12-19 09:10:46 [INFO] Test that negative thickness raises error. ... ok
+2025-12-19 09:10:46 [INFO] Test valid positive thickness. ... ok
+2025-12-19 09:10:46 [INFO] Test thickness setter validation. ... ok
+2025-12-19 09:10:46 [INFO] Test that zero thickness raises error. ... ok
+2025-12-19 09:10:46 [INFO] Test that layer type is case insensitive. ... ok
+2025-12-19 09:10:46 [INFO] Test that invalid layer type raises error. ... ok
+2025-12-19 09:10:46 [INFO] Test layer type setter. ... ok
+2025-12-19 09:10:46 [INFO] Test valid layer types. ... ok
+2025-12-19 09:10:46 [INFO] Test that invalid conductivity raises error. ... ok
+2025-12-19 09:10:46 [INFO] Test that invalid frequency array raises error. ... ok
+2025-12-19 09:10:46 [INFO] Test that invalid types raise appropriate errors. ... ok
+2025-12-19 09:10:46 [INFO] Test copper layer with typical parameters. ... ok
+2025-12-19 09:10:46 [INFO] Test perfect electrical conductor. ... ok
+2025-12-19 09:10:46 [INFO] Test stainless steel layer. ... ok
+2025-12-19 09:10:46 [INFO] Test vacuum boundary layer. ... ok
+2025-12-19 09:10:46 [INFO] Test that roughness effect increases with frequency. ... ok
+2025-12-19 09:10:46 [INFO] Test that roughness increases surface resistance. ... ok
+2025-12-19 09:10:46 [INFO] Test copper skin depth at 1 MHz. ... ok
+2025-12-19 09:10:46 [INFO] Test that skin depth decreases with frequency. ... ok
+2025-12-19 09:10:46 [INFO] Test default surface impedance calculation. ... ok
+2025-12-19 09:10:46 [INFO] Test set_surf_imped with interpolation. ... ok
+2025-12-19 09:10:46 [INFO] Test setting surface impedance directly. ... ok
+2025-12-19 09:10:46 [INFO] Test that surface impedance must be complex. ... ok
+2025-12-19 09:10:46 [INFO]  =============================================
+2025-12-19 09:10:46 [INFO]  =============   testing test_multiple_chamber =================
+2025-12-19 09:10:46 [INFO]  =============================================
+2025-12-19 09:10:46 [INFO] Test that calculate_element returns numpy arrays. ... ok
+2025-12-19 09:10:46 [INFO] Test calculating a single element. ... ok
+2025-12-19 09:10:46 [INFO] Test that cfg resolution is case-insensitive. ... ok
+2025-12-19 09:10:46 [INFO] Test cfg filename resolution with default (apertype + .cfg). ... ok
+2025-12-19 09:10:46 [INFO] Test cfg filename resolution from mapping. ... ok
+2025-12-19 09:10:46 [INFO] Test that all data lists have the same length. ... ok
+2025-12-19 09:10:46 [INFO] Test that frequency reference is initialized after load. ... ok
+2025-12-19 09:10:46 [INFO] Test that geometry values are positive. ... ok
+2025-12-19 09:10:46 [INFO] Test loading input data. ... ok
+2025-12-19 09:10:46 [INFO] Test that load() populates all data lists. ... ok
+2025-12-19 09:10:46 [INFO] Test impedance type guessing for dipolar. ... ok
+2025-12-19 09:10:46 [INFO] Test impedance type guessing for longitudinal. ... ok
+2025-12-19 09:10:46 [INFO] Test impedance type guessing for transverse. ... ok
+2025-12-19 09:10:46 [INFO] Test detection with complex impedance. ... ok
+2025-12-19 09:10:46 [INFO] Test handling of NaN values. ... ok
+2025-12-19 09:10:46 [INFO] Test detection of non-zero impedance. ... ok
+2025-12-19 09:10:46 [INFO] Test detection of zero impedance. ... ok
+2025-12-19 09:10:46 [INFO] Test custom aperture type mapping. ... ok
+2025-12-19 09:10:46 [INFO] Test that default aperture type mapping is set. ... ok
+2025-12-19 09:10:46 [INFO] Test basic initialization. ... ok
+2025-12-19 09:10:46 [INFO] Test initialization with absolute paths. ... ok
+2025-12-19 09:10:46 [INFO] Test full workflow with just a few elements. ... ok
+2025-12-19 09:10:46 [INFO] Test that output directory is created. ... ok
+2025-12-19 09:10:46 [INFO]  =============================================
+2025-12-19 09:10:46 [INFO]  =============   testing test_plot =================
+2025-12-19 09:10:46 [INFO]  =============================================
+2025-12-19 09:10:46 [INFO] Creating plot: ZLong.png
+2025-12-19 09:10:46 [INFO] Figure saved to /home/tatij/CERN/pytlwall/pytlwall-master/tests/output/one_layer/img/ZLong.png
+2025-12-19 09:10:46 [INFO] Testing longitudinal simple plot, scale log ... ok
+2025-12-19 09:10:47 [INFO] Figure saved to /home/tatij/CERN/pytlwall/pytlwall-master/tests/output/one_layer/img/ZTransReal.png
+2025-12-19 09:10:47 [INFO] Figure saved to /home/tatij/CERN/pytlwall/pytlwall-master/tests/output/one_layer/img/ZTransImag.png
+2025-12-19 09:10:47 [INFO] Testing transverse plot, scale log, symlog ... ok
+2025-12-19 09:10:47 [INFO]  =============================================
+2025-12-19 09:10:47 [INFO]  =============   testing test_tlwall =================
+2025-12-19 09:10:47 [INFO]  =============================================
+2025-12-19 09:10:47 [INFO] Test that changing accuracy factor does NOT invalidate cache. ... ok
+2025-12-19 09:10:47 [INFO] Test modifying accuracy factor. ... ok
+2025-12-19 09:10:47 [INFO] Test that ZDipX includes Yokoya driving factor. ... ok
+2025-12-19 09:10:47 [INFO] Test that ZDipY includes Yokoya driving factor. ... ok
+2025-12-19 09:10:47 [INFO] Test with very thick layer (1 m). ... ok
+2025-12-19 09:10:47 [INFO] Test with very thin layer (1 nm). ... ok
+2025-12-19 09:10:47 [INFO] Test basic TlWall initialization. ... ok
+2025-12-19 09:10:47 [INFO] Test that chamber without layers raises error. ... ok
+2025-12-19 09:10:47 [INFO] Test initialization with custom accuracy factor. ... ok
+2025-12-19 09:10:47 [INFO] Test that ZLong varies with frequency. ... ok
+2025-12-19 09:10:47 [INFO] Test that ZLong doesn't contain NaN. ... ok
+2025-12-19 09:10:47 [INFO] Test that real part of ZLong is positive (resistive). ... ok
+2025-12-19 09:10:47 [INFO] Test that ZLong property caches result. ... ok
+2025-12-19 09:10:47 [INFO] Test that calc_ZLong returns numpy array. ... ok
+2025-12-19 09:10:47 [INFO] Test single copper layer. ... ok
+2025-12-19 09:10:47 [INFO] Test two-layer configuration (coating + substrate). ... ok
+2025-12-19 09:10:47 [INFO] Test that calc_ZLongDSC caches result. ... ok
+2025-12-19 09:10:47 [INFO] Test that calc_ZLongDSC method exists. ... ok
+2025-12-19 09:10:47 [INFO] Test that calc_ZLongDSC returns correct array. ... ok
+2025-12-19 09:10:47 [INFO] Test that calc_ZLongISC method exists. ... ok
+2025-12-19 09:10:47 [INFO] Test that calc_ZLongISC returns correct array. ... ok
+2025-12-19 09:10:47 [INFO] Test that calc_ZTransDSC method exists. ... ok
+2025-12-19 09:10:47 [INFO] Test that calc_ZTransDSC returns correct array. ... ok
+2025-12-19 09:10:47 [INFO] Test that calc_ZTransISC method exists. ... ok
+2025-12-19 09:10:47 [INFO] Test that calc_ZTransISC returns correct array. ... ok
+2025-12-19 09:10:47 [INFO] Test that space charge impedance varies with frequency. ... ok
+2025-12-19 09:10:47 [INFO] Test that non-relativistic beam gives non-zero space charge. ... ok
+2025-12-19 09:10:47 [INFO] Test that ultra-relativistic beam gives zero space charge. ... ok
+2025-12-19 09:10:47 [INFO] Test relationship between ZLong and ZLongSurf. ... ok
+2025-12-19 09:10:47 [INFO] Test that ZTrans doesn't contain NaN. ... ok
+2025-12-19 09:10:47 [INFO] Test that ZTrans property caches result. ... ok
+2025-12-19 09:10:47 [INFO] Test that calc_ZTrans returns numpy array. ... ok
+2025-12-19 09:10:47 [INFO] Test get_all_impedances returns dictionary. ... ok
+2025-12-19 09:10:47 [INFO] Test __repr__ method. ... ok
+2025-12-19 09:10:47 [INFO] Test __str__ method. ... ok
+2025-12-19 09:10:47 [INFO] Test that summary returns formatted string. ... ok
+2025-12-19 09:10:47 [INFO] ================================================================================
+2025-12-19 09:10:47 [INFO] TEST SUMMARY
+2025-12-19 09:10:47 [INFO] ================================================================================
+2025-12-19 09:10:47 [INFO] Tests run: 322
+2025-12-19 09:10:47 [INFO] Failures: 0
+2025-12-19 09:10:47 [INFO] Errors: 0
+2025-12-19 09:10:47 [INFO] 
+2025-12-19 09:10:47 [INFO] RESULT: ALL TESTS PASSED ✓
+2025-12-19 09:10:47 [INFO] ================================================================================
+2025-12-19 09:10:47 [INFO] 
+2025-12-19 09:10:47 [INFO] ================================================================================

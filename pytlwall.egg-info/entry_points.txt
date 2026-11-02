@@ -1,0 +1,5 @@
+[console_scripts]
+pytlwall = pytlwall.__main__:main
+
+[gui_scripts]
+pytlwall-gui = pytlwall_gui.main:main
